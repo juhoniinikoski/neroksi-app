@@ -8,12 +8,11 @@
         "question": "Question 1"
       },
       {
-        "id": 2,
+        "id": 1,
         "question": "Question 2"
       }
     ]
   },
-  
   {
     "name": "Category 2",
     "id": 1,
