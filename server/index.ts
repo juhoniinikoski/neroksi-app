@@ -1,8 +1,41 @@
-import express from 'express';
+const express = require('express')
+const { ApolloServer, gql } = require('apollo-server-express')
+const categories = require('./test/test_data.json')
 
-const app = express();
-const PORT = 8000;
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
-});
+console.log(categories.map((c: any) => c.items.map((q: any) => q)))
+
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+  type Query {
+    categories: [Category]
+    findCategory(id: Int!): Category
+  },
+  type Category {
+    name: String!
+    id: ID!
+  }
+  type Item {
+    question: String!
+    id: ID!
+  }
+`
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    categories: () => categories,
+    findCategory: (root: any, args: any) =>
+      categories.find((c: any) => c.id === args.id)
+  },
+}
+
+const server = new ApolloServer({ typeDefs, resolvers })
+
+const app = express()
+server.applyMiddleware({ app })
+
+app.get('/', (req: any, res: any) => res.send('Express + GraphQL + TypeScript Server'));
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+)
