@@ -1,39 +1,48 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import { ApolloProvider } from '@apollo/client'
-import { NativeRouter } from 'react-router-native'
 import createApolloClient from './utils/apollo-client/apolloClient'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 const apolloClient = createApolloClient()
-
-import { useQuery } from '@apollo/client';
-
-import { GET_ALL_CATEGORIES } from './utils/graphql/quories'
-
-const Component = () => {
-
-  const { data, error, loading } = useQuery(GET_ALL_CATEGORIES)
-
-  console.log(data)
-
-  return (
-    <Text>Open up App.tsx to start working on your app!</Text>
-  )
-}
+const Stack = createStackNavigator();
 
 export default function App() {
 
-  console.log('toimii')
-
   return (
-
-    // <NativeRouter>
-      <ApolloProvider client={apolloClient}>
-        <Component />
-      </ApolloProvider>
-    // </NativeRouter>
+    <ApolloProvider client={apolloClient}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name='Home' component={Home} />
+          <Stack.Screen name='Details' component={Details} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApolloProvider>
   )
 }
+
+const Details = () => {
+  return (
+    <Text>
+      Details
+    </Text>
+  )
+}
+
+const Home = ( {navigation}: {navigation: any} ) => {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  )
+}
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -42,4 +51,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
