@@ -1,6 +1,7 @@
 const express = require('express')
 const { ApolloServer, gql } = require('apollo-server-express')
 const categories = require('./test/test_data.json')
+const questions = require('./test/test_data_questions.json')
 const cors = require('cors')
 
 
@@ -10,7 +11,8 @@ const typeDefs = gql`
     allCategories: [Category]
     filterCategories(search: String!): [Category]
     findCategory(id: Int!): Category
-    findQuestion(category_id: Int!, question_id: Int!): Item
+    findQuestions(categoryID: Int!): [Question]
+
   },
   type Category {
     name: String!
@@ -20,6 +22,20 @@ const typeDefs = gql`
   type Item {
     question: String!
     id: ID!
+    answers: [Answer!]
+    correct: Int!
+  }
+  type Question {
+    id: ID!
+    question: String!
+    category: String!
+    categoryID: ID!
+    correct: ID!
+    answers: [Answer!]
+  }
+  type Answer {
+    id: ID!
+    ans: String!
   }
 `
 
@@ -34,9 +50,8 @@ const resolvers = {
     findCategory: (root: any, args: any) =>
       categories.find((c: any) => c.id === args.id),
     // finds a certain question within given category
-    findQuestion: (root: any, args: any) =>
-      categories.find((c: any) => c.id === args.category_id)
-      .items.find((i: any) => i.id === args.question_id)
+    findQuestions: (root: any, args: any) =>
+      questions.filter((q: any) => q.categoryID === args.categoryID)
   },
 }
 

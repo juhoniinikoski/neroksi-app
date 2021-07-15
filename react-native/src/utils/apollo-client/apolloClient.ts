@@ -7,7 +7,9 @@ const httpLink = createHttpLink({
 const createApolloClient = () => {
   return new ApolloClient({
     link: httpLink,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      dataIdFromObject: o => (o._id ? `${o.__typename}:${o._id}`: null),
+    })
   });
 };
 
