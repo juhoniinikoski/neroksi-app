@@ -1,32 +1,9 @@
 import React, { useState } from "react"
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native"
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Pressable } from "react-native"
 import { GET_QUESTIONS } from "../utils/graphql/quories"
 import { useQuery } from '@apollo/client'
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-]
-
-const Item = ({ item, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={styles.item}>
-    <Text style={styles.title}>{item.title}</Text>
-  </TouchableOpacity>
-)
-
 const Question = ( {route}: {route: any} ) => {
-  
-  console.log(route.params.question.question)
 
   const questionName = route.params.question.question
   const questionID = route.params.question.id
@@ -37,20 +14,20 @@ const Question = ( {route}: {route: any} ) => {
   const renderItem = ({ item }) => {
 
     return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-      />
+      <Pressable onPress={() => console.log('painettu')} style={styles.container}>
+        <Text style={styles.buttonText}>{item.ans}</Text>
+      </Pressable>
     )
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <FlatList
-        data={DATA}
+        data={answers}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(answer) => answer.id}
         extraData={selectedId}
+        style={{alignSelf: 'stretch', marginTop: 4}}
       />
     </SafeAreaView>
   )
@@ -58,17 +35,25 @@ const Question = ( {route}: {route: any} ) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
+    height: 100,
+    justifyContent: 'center',
     padding: 16,
     alignSelf: 'stretch',
     margin: 8,
     backgroundColor: 'white'
   },
+  item: {
+    padding: 16,
+    alignSelf: 'stretch',
+    marginVertical: 4,
+    marginHorizontal: 8,
+    backgroundColor: 'white'
+  },
   title: {
     fontSize: 24,
+  },
+  buttonText: {
+    fontSize: 16
   },
 })
 

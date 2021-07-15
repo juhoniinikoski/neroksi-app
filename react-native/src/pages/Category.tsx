@@ -1,14 +1,20 @@
 import React from "react"
-import { Text, SafeAreaView, StyleSheet, View, Pressable } from 'react-native'
+import { Text, SafeAreaView, StyleSheet, View, Pressable, FlatList } from 'react-native'
 import { useQuery } from '@apollo/client'
-import { GET_CATEGORY } from '../utils/graphql/quories'
+import { GET_QUESTIONS } from '../utils/graphql/quories'
+import useQuestions from "../hooks/useQuestions"
 
 const Category = ( {route, navigation}: {route: any, navigation: any} ) => {
 
   const id = parseInt(route.params.category.id)
 
-  const { data, error, loading } = useQuery(GET_CATEGORY, { variables: {id: id} })
-  const items = loading ? null : data.findCategory.items
+  const { questions, loading } = useQuestions(id)
+
+  const renderItem = ({ item }) => (
+    <Pressable onPress={() => navigation.navigate('Question', {question: item})} style={styles.container}>
+      <Text style={styles.buttonText}>{item.question}</Text>
+    </Pressable>
+  )
 
   if (loading) {
     return (
@@ -17,24 +23,23 @@ const Category = ( {route, navigation}: {route: any, navigation: any} ) => {
       </View>
     )
   }
-  console.log(data.findCategory)
-
-  console.log(items)
 
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.title}>
-        {route.params.category.name}
-      </Text>
-      {items.map((i: any) => <Pressable key={i.id} onPress={() => navigation.navigate('Question', {question: i})} style={styles.container}>
-          <Text style={styles.buttonText}>{i.question}</Text>
-        </Pressable>)}
+      <FlatList
+        data={questions}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        style={{alignSelf: 'stretch', marginTop: 8}}
+      />
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    height: 100,
+    justifyContent: 'center',
     padding: 16,
     alignSelf: 'stretch',
     margin: 8,

@@ -14,7 +14,7 @@
         "ans": "answer 2"
       }
     ],
-    "rightAns": 1
+    "correct": 1
   },
   {
     "id": 1,
@@ -31,7 +31,7 @@
         "ans": "answer 4"
       }
     ],
-    "rightAns": 0
+    "correct": 0
   },
   {
     "id": 0,
@@ -48,7 +48,7 @@
         "ans": "answer 2"
       }
     ],
-    "rightAns": 1
+    "correct": 1
   },
   {
     "id": 1,
@@ -65,7 +65,7 @@
         "ans": "answer 4"
       }
     ],
-    "rightAns": 0
+    "correct": 0
   },
   {
     "id": 2,
@@ -82,7 +82,7 @@
         "ans": "answer 4"
       }
     ],
-    "rightAns": 1
+    "correct": 1
   },
   {
     "id": 0,
@@ -99,6 +99,6 @@
         "ans": "answer 2"
       }
     ],
-    "rightAns": 1
+    "correct": 1
   }
 ]

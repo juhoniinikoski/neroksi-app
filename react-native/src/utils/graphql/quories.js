@@ -33,7 +33,7 @@ query findQuestionsById($id: Int!) {
     question
     id
     categoryID
-    rightAns
+    correct
     answers {
       ans
       id

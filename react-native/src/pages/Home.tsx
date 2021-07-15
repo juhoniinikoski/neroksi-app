@@ -1,11 +1,19 @@
-import React from "react"
-import { View, Text, Pressable, StyleSheet } from "react-native"
+import React, { useEffect } from "react"
+import { View, Text, Pressable, StyleSheet, SafeAreaView, FlatList } from "react-native"
 import { useQuery } from '@apollo/client';
-import { GET_ALL_CATEGORIES } from '../utils/graphql/quories'
+import { GET_ALL_CATEGORIES, GET_QUESTIONS } from '../utils/graphql/quories'
+import useCategories from "../hooks/useCategories";
+import useQuestions from "../hooks/useQuestions";
 
 const Home = ( {navigation}: {navigation: any} ) => {
 
-  const { data, error, loading } = useQuery(GET_ALL_CATEGORIES)
+  const { categories, loading } = useCategories()
+
+  const renderItem = ({ item }) => (
+    <Pressable onPress={() => navigation.navigate('Category', {category: item})} style={styles.container}>
+      <Text style={styles.buttonText}>{item.name}</Text>
+    </Pressable>
+  )
 
   if (loading) {
     return (
@@ -16,22 +24,23 @@ const Home = ( {navigation}: {navigation: any} ) => {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.title}>Home Screen</Text>
-      {data.allCategories.map((c: any) => 
-        <Pressable key={c.id} onPress={() => navigation.navigate('Category', {category: c})} style={styles.container}>
-          <Text style={styles.buttonText}>{c.name}</Text>
-        </Pressable>
-      )}
-    </View>
+    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <FlatList
+        data={categories}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        style={{alignSelf: 'stretch', marginTop: 4}}
+      />
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
     padding: 16,
-    alignSelf: 'stretch',
-    margin: 8,
+    marginHorizontal: 8,
+    marginVertical: 4,
     backgroundColor: 'white'
   },
   title: {
