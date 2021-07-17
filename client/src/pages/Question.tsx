@@ -3,7 +3,11 @@ import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Pressable } from "
 import { GET_QUESTIONS } from "../utils/graphql/quories"
 import { useQuery } from '@apollo/client'
 
-const Question = ( {route}: {route: any} ) => {
+interface Props {
+  route: any
+}
+
+const Question: React.FC<Props> = ( {route} ) => {
 
   const questionName = route.params.question.question
   const questionID = route.params.question.id
@@ -11,7 +15,7 @@ const Question = ( {route}: {route: any} ) => {
 
   const [selectedId, setSelectedId] = useState(null)
 
-  const renderItem = ({ item }) => {
+  const renderItem = ( {item}: {item: any} ) => {
 
     return (
       <Pressable onPress={() => console.log('painettu')} style={styles.container}>

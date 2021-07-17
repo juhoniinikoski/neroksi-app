@@ -4,13 +4,18 @@ import { useQuery } from '@apollo/client'
 import { GET_QUESTIONS } from '../utils/graphql/quories'
 import useQuestions from "../hooks/useQuestions"
 
-const Category = ( {route, navigation}: {route: any, navigation: any} ) => {
+interface Props {
+  navigation: any
+  route: any
+}
+
+const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const id = parseInt(route.params.category.id)
 
   const { questions, loading } = useQuestions(id)
 
-  const renderItem = ({ item }) => (
+  const renderItem = ( {item}: {item: any} ) => (
     <Pressable onPress={() => navigation.navigate('Question', {question: item})} style={styles.container}>
       <Text style={styles.buttonText}>{item.question}</Text>
     </Pressable>

@@ -1,7 +1,11 @@
 import React from "react"
 import { Text, SafeAreaView } from 'react-native'
 
-const Profile = () => {
+interface Props {
+  
+}
+
+const Profile: React.FC<Props> = () => {
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>
