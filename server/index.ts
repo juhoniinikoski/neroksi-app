@@ -23,7 +23,6 @@ const typeDefs = gql`
     question: String!
     id: ID!
     answers: [Answer!]
-    correct: Int!
   }
   type Question {
     id: ID!
@@ -36,6 +35,7 @@ const typeDefs = gql`
   type Answer {
     id: ID!
     ans: String!
+    correct: Boolean!
   }
 `
 

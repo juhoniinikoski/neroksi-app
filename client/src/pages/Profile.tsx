@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 import { Text, SafeAreaView } from 'react-native'
 
 interface Props {
-  
+
 }
 
 const Profile: React.FC<Props> = () => {

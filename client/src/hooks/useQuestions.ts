@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { useQuery } from "@apollo/client"
-import { GET_QUESTIONS } from "../utils/graphql/quories"
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { GET_QUESTIONS } from '../utils/graphql/quories'
 
 const useQuestions = (id: number) => {
 

@@ -1,6 +1,6 @@
-import { useState } from "react"
-import { useQuery } from "@apollo/client"
-import { GET_ALL_CATEGORIES } from "../utils/graphql/quories"
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+import { GET_ALL_CATEGORIES } from '../utils/graphql/quories'
 
 const useRepositories = () => {
 

@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Pressable } from "react-native"
-import { GET_QUESTIONS } from "../utils/graphql/quories"
-import { useQuery } from '@apollo/client'
+import React, { useState } from 'react'
+import { View, FlatList, SafeAreaView, StyleSheet, Text, Pressable, Dimensions } from 'react-native'
+import OptionBox from '../components/OptionBox'
+import QuestionScreen from '../components/QuestionScreen'
 
 interface Props {
   route: any
@@ -9,35 +9,43 @@ interface Props {
 
 const Question: React.FC<Props> = ( {route} ) => {
 
-  const questionName = route.params.question.question
-  const questionID = route.params.question.id
-  const answers = route.params.question.answers
+  const height = Dimensions.get('screen').height
+  const width = Dimensions.get('screen').width
 
-  const [selectedId, setSelectedId] = useState(null)
+  const questions: any = route.params.questions
+  const initialScrollID: number = route.params.initialScrollID
 
-  const renderItem = ( {item}: {item: any} ) => {
+  const renderItem = ( {item}: {item: any} ) => <QuestionScreen item={item}/>
 
-    return (
-      <Pressable onPress={() => console.log('painettu')} style={styles.container}>
-        <Text style={styles.buttonText}>{item.ans}</Text>
-      </Pressable>
-    )
-  }
+  // const renderItem = ( {item}: {item: any} ) => {
+
+  //   return (
+  //     <View style={{...styles.scrollItemView, width: width, height: height}}>
+  //       <Text>{item.question}</Text>
+  //     </View>
+  //   )
+  // }
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <FlatList
-        data={answers}
-        renderItem={renderItem}
-        keyExtractor={(answer) => answer.id}
-        extraData={selectedId}
-        style={{alignSelf: 'stretch', marginTop: 4}}
-      />
-    </SafeAreaView>
+      pagingEnabled={true}
+      initialScrollIndex={initialScrollID}
+      data={questions}
+      keyExtractor={(item) => item.id}
+      renderItem={renderItem}
+      getItemLayout={(data: any, index: number) => (
+        {length: height, offset: height * index, index}
+      )}/>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  scrollItemView: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   container: {
     height: 100,
     justifyContent: 'center',
@@ -58,7 +66,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16
-  },
+  }
 })
 
 export default Question

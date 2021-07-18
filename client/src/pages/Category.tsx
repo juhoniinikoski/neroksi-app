@@ -1,8 +1,6 @@
-import React from "react"
-import { Text, SafeAreaView, StyleSheet, View, Pressable, FlatList } from 'react-native'
-import { useQuery } from '@apollo/client'
-import { GET_QUESTIONS } from '../utils/graphql/quories'
-import useQuestions from "../hooks/useQuestions"
+import React from 'react'
+import { Text, SafeAreaView, StyleSheet, View, FlatList, Pressable } from 'react-native'
+import useQuestions from '../hooks/useQuestions'
 
 interface Props {
   navigation: any
@@ -16,7 +14,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const { questions, loading } = useQuestions(id)
 
   const renderItem = ( {item}: {item: any} ) => (
-    <Pressable onPress={() => navigation.navigate('Question', {question: item})} style={styles.container}>
+    <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: item.id})} style={styles.container}>
       <Text style={styles.buttonText}>{item.question}</Text>
     </Pressable>
   )
@@ -35,7 +33,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         data={questions}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        style={{alignSelf: 'stretch', marginTop: 8}}
+        style={{alignSelf: 'stretch', marginTop: 4}}
       />
     </SafeAreaView>
   )
