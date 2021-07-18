@@ -17,15 +17,6 @@ const Question: React.FC<Props> = ( {route} ) => {
 
   const renderItem = ( {item}: {item: any} ) => <QuestionScreen item={item}/>
 
-  // const renderItem = ( {item}: {item: any} ) => {
-
-  //   return (
-  //     <View style={{...styles.scrollItemView, width: width, height: height}}>
-  //       <Text>{item.question}</Text>
-  //     </View>
-  //   )
-  // }
-
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <FlatList
