@@ -1,12 +1,8 @@
-import { isNetworkRequestInFlight } from "@apollo/client/core/networkStatus";
-import { Verify } from "crypto";
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView, Dimensions } from "react-native";
+import React, { useState } from "react"
+import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView, Dimensions } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 
-const Test = ( props: any ) => {
-
-  const scrollIndex: number = parseInt(props.route.params.question.id)
+const Test = (  ) => {
 
   const array = [
     {
@@ -55,7 +51,6 @@ const Test = ( props: any ) => {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <FlatList
       pagingEnabled={true}
-      initialScrollIndex={scrollIndex}
       data={array}
       keyExtractor={(item) => item.id}
       renderItem={renderItem}
