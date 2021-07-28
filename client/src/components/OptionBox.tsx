@@ -5,16 +5,24 @@ interface Props {
   item: any
 }
 
+interface Scroll {
+  x: number
+  y: number
+  animated: boolean
+}
+
 const OptionBox: React.FC<Props> = ( {item} ) => {
 
   const checkAnswer = (correct: boolean) => {
-    
+    if (correct) {
+      console.log('oikein')
+      
+    }
   }
 
   return (
     <Pressable onPress={() => checkAnswer(item.correct)} style={styles.container}>
       <View style={{display: 'flex', flexDirection: 'row', height: 100}}>
-        <View style={{backgroundColor: 'red', width: 20, marginLeft: -16}}></View>
         <Text style={styles.buttonText}>{item.ans}</Text>
       </View>
     </Pressable>
