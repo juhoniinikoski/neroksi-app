@@ -1,63 +1,17 @@
+import { useQuery } from "@apollo/client"
 import React, { useState } from "react"
 import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView, Dimensions } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
+import { GET_ALL_CATEGORIES } from "../utils/graphql/quories"
 
 const Test = (  ) => {
 
-  const array = [
-    {
-      "id": 1,
-      "color": "red"
-    },
-    {
-      "id": 2,
-      "color": "blue"
-    },
-    {
-      "id": 3,
-      "color": "green"
-    },
-    {
-      "id": 4,
-      "color": "white"
-    },
-    {
-      "id": 5,
-      "color": "grey"
-    },
-    {
-      "id": 6,
-      "color": "violet"
-    },
-    {
-      "id": 7,
-      "color": "yellow"
-    },
-  ]
+  const { data } = useQuery(GET_ALL_CATEGORIES)
+  console.log(data)
 
-  const height = Dimensions.get('screen').height
-  const width = Dimensions.get('screen').width
-
-  const renderItem = ( {item}: {item: any} ) => {
-
-    return (
-      <View style={{...styles.scrollItemView, backgroundColor: item.color, width: width, height: height}}>
-        <Text>{item.id}</Text>
-      </View>
-    )
-  }
-
+  
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <FlatList
-      pagingEnabled={true}
-      data={array}
-      keyExtractor={(item) => item.id}
-      renderItem={renderItem}
-      getItemLayout={(data: any, index: number) => (
-        {length: height, offset: height * index, index}
-      )}/>
-    </View>
+    <View></View>
   )
 }
 

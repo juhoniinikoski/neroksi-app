@@ -10,7 +10,7 @@ const useQuestions = (id: number) => {
     fetchPolicy: "cache-and-network",
     variables: { id: id },
     onCompleted: (data) => {
-      setQuestions(data.findQuestions)
+      setQuestions(data.category.questions)
     },
   })
 

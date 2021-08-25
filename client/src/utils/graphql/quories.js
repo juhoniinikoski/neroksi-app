@@ -1,42 +1,36 @@
 import { gql } from '@apollo/client';
 
-export const GET_ALL_CATEGORIES = gql`
+export const GET_CATEGORIES = gql`
   query {
-    allCategories {
-      name
+    categories {
       id
+      categoryTitle
     }
   }
 `
 
 export const GET_CATEGORY = gql`
-query findCategoryById($id: Int!) {
-  findCategory(id: $id) {
-    name
+query findCategoryById($id: ID!) {
+  category(id: $id) {
+    categoryTitle
     id
-    items {
+    questions {
       id
-      question
-      answers {
-        ans
-        id
-      }
-      correct
+      questionTitle
     }
   }
 }
 `
 
 export const GET_QUESTIONS = gql`
-query findQuestionsById($id: Int!) {
-  findQuestions(categoryID: $id) {
-    question
+query findQuestionsById($id: ID!) {
+  category(id: $id) {
+    categoryTitle
     id
-    categoryID
-    answers {
-      ans
+    questions {
       id
-      correct
+      questionTitle
+      answers
     }
   }
 }

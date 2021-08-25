@@ -13,9 +13,10 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const { questions, loading } = useQuestions(id)
 
-  const renderItem = ( {item}: {item: any} ) => (
-    <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: item.id})} style={styles.container}>
-      <Text style={styles.buttonText}>{item.question}</Text>
+  const renderItem = ( {item, index}: {item: any, index: number} ) => (
+    <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index
+    })} style={styles.container}>
+      <Text style={styles.buttonText}>{item.questionTitle}</Text>
     </Pressable>
   )
 

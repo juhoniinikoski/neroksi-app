@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, Text, Pressable, StyleSheet, SafeAreaView, FlatList } from 'react-native'
 import useCategories from '../hooks/useCategories'
+import textStyles from '../styles/textStyles'
 
 interface Props {
   navigation: any
@@ -12,7 +13,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
 
   const renderItem = ( {item}: {item: any} ) => (
     <Pressable onPress={() => navigation.navigate('Category', {category: item})} style={styles.container}>
-      <Text style={styles.buttonText}>{item.name}</Text>
+      <Text style={textStyles.bodyText}>{item.categoryTitle}</Text>
     </Pressable>
   )
 
@@ -29,6 +30,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
       <FlatList
         data={categories}
         renderItem={renderItem}
+        ListHeaderComponent={<Text style={textStyles.title}>Selaa</Text>}
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
       />
@@ -49,10 +51,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontSize: 30,
     fontWeight: "bold"
-  },
-  buttonText: {
-    fontSize: 16
-  },
+  }
 })
 
 export default Home

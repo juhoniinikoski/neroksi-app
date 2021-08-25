@@ -1,26 +1,19 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Home from '../pages/Home'
-import Category from '../pages/Category'
+import Question from '../pages/Question'
+import { TabNav } from './rootTabNav'
 import colors from '../styles/colorStyles'
 
 const Stack = createStackNavigator()
 
-export const HomeStack = () => {
+export const RootStack = () => {
   return (
     <SafeAreaProvider style={{ backgroundColor: colors.background }}>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name='Home' component={Home}/>
-        <Stack.Screen name='Category' component={Category}/>
+        <Stack.Screen name='Home' component={TabNav} options={{headerShown: false}}/>
+        <Stack.Screen name='Question' component={Question} options={{headerShown: false}}/>
       </Stack.Navigator>
     </SafeAreaProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})

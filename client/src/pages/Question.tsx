@@ -8,11 +8,11 @@ interface Props {
 }
 
 const Question: React.FC<Props> = ( {route} ) => {
-
+  
   const height = Dimensions.get('screen').height
-  const width = Dimensions.get('screen').width
 
   const questions: any = route.params.questions
+  
   const initialScrollID: number = route.params.initialScrollID
 
   const renderItem = ( {item}: {item: any} ) => <QuestionScreen item={item}/>
