@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
+import textStyles from '../styles/textStyles'
 import OptionBox from './OptionBox'
 
 interface Props {
@@ -9,11 +10,10 @@ interface Props {
 const QuestionScreen: React.FC<Props> = ( {item} ) => {
 
   const height = Dimensions.get('screen').height
-  const width = Dimensions.get('screen').width
 
   return (
-    <View style={{...styles.scrollItemView, width: width, height: height}}>
-      <Text style={styles.title}>{item.questionTitle}</Text>
+    <View style={{...styles.scrollItemView, height: height}}>
+      <Text style={{...textStyles.subTitle, marginBottom: 24}}>{item.questionTitle}</Text>
       {item.answers.map((ans: any) => <OptionBox key={ans.ans} item={ans}/>)}
     </View>
   )

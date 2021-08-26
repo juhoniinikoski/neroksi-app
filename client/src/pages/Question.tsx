@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { View, FlatList, SafeAreaView, StyleSheet, Text, Pressable, Dimensions } from 'react-native'
+import { View, FlatList, StyleSheet, Text, Pressable, Dimensions } from 'react-native'
 import OptionBox from '../components/OptionBox'
 import QuestionScreen from '../components/QuestionScreen'
+import styles from '../styles/styles'
 
 interface Props {
   route: any
@@ -18,7 +19,7 @@ const Question: React.FC<Props> = ( {route} ) => {
   const renderItem = ( {item}: {item: any} ) => <QuestionScreen item={item}/>
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.mainContainer}>
       <FlatList
       pagingEnabled={true}
       initialScrollIndex={initialScrollID}
@@ -32,7 +33,7 @@ const Question: React.FC<Props> = ( {route} ) => {
   )
 }
 
-const styles = StyleSheet.create({
+const oldStyles = StyleSheet.create({
   scrollItemView: {
     alignItems: 'center',
     justifyContent: 'center'

@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
+import styles from '../styles/styles'
+import textStyles from '../styles/textStyles'
 
 interface Props {
   item: any
@@ -21,36 +23,12 @@ const OptionBox: React.FC<Props> = ( {item} ) => {
   }
 
   return (
-    <Pressable onPress={() => checkAnswer(item.correct)} style={styles.container}>
-      <View style={{display: 'flex', flexDirection: 'row', height: 100}}>
-        <Text style={styles.buttonText}>{item.ans}</Text>
+    <Pressable onPress={() => checkAnswer(item.correct)} style={styles.questionBox}>
+      <View>
+        <Text style={textStyles.bodyText}>{item.ans}</Text>
       </View>
     </Pressable>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: 100,
-    justifyContent: 'center',
-    padding: 16,
-    alignSelf: 'stretch',
-    margin: 8,
-    backgroundColor: 'white'
-  },
-  item: {
-    padding: 16,
-    alignSelf: 'stretch',
-    marginVertical: 4,
-    marginHorizontal: 8,
-    backgroundColor: 'white'
-  },
-  title: {
-    fontSize: 24,
-  },
-  buttonText: {
-    fontSize: 16
-  },
-})
 
 export default OptionBox

@@ -7,8 +7,13 @@ const textStyles = StyleSheet.create({
       fontWeight: 'bold',
       fontSize: 40,
     },
+    subTitle: {
+      color: colors.lightText,
+      fontWeight: 'bold',
+      fontSize: 20,
+    },
     bodyText: {
-      color: colors.darkText,
+      color: colors.lightText,
       fontSize: 16,
       fontWeight: 'normal'
     },

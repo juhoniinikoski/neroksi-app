@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_CATEGORIES } from '../utils/graphql/quories'
 
-const useRepositories = () => {
+const useUserCategories = () => {
 
   const [categories, setCategories] = useState([])
 
@@ -16,4 +16,4 @@ const useRepositories = () => {
   return { categories, loading, error }
 }
 
-export default useRepositories
+export default useUserCategories

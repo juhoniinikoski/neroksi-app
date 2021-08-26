@@ -12,8 +12,8 @@ export const HomeStack = () => {
   return (
     <SafeAreaProvider style={{ backgroundColor: colors.background }}>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name='Home' component={Home}/>
-        <Stack.Screen name='Category' component={Category}/>
+        <Stack.Screen name='Home' component={Home} options={{headerTransparent: true, title: ''}}/>
+        <Stack.Screen name='Category' component={Category} options={{headerTransparent: true, title: ''}}/>
       </Stack.Navigator>
     </SafeAreaProvider>
   )

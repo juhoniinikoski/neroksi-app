@@ -1,6 +1,10 @@
+import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
-import { Text, SafeAreaView, StyleSheet, View, FlatList, Pressable } from 'react-native'
+import { Text, StyleSheet, View, FlatList, Pressable } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import useQuestions from '../hooks/useQuestions'
+import styles from '../styles/styles'
+import textStyles from '../styles/textStyles'
 
 interface Props {
   navigation: any
@@ -10,14 +14,26 @@ interface Props {
 const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const id = parseInt(route.params.category.id)
+  const title = route.params.category.categoryTitle
 
   const { questions, loading } = useQuestions(id)
+  const headerHeight = useHeaderHeight()
 
   const renderItem = ( {item, index}: {item: any, index: number} ) => (
     <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index
-    })} style={styles.container}>
-      <Text style={styles.buttonText}>{item.questionTitle}</Text>
+    })} style={styles.question}>
+      <Text style={textStyles.bodyText}>{item.questionTitle}</Text>
     </Pressable>
+  )
+
+  const listHeader = () => (
+    <View>
+      <Text style={textStyles.title}>{'📎 ' + title}</Text>
+    </View>
+  )
+
+  const separatorItem = () => (
+    <View style={styles.separator}/>
   )
 
   if (loading) {
@@ -29,26 +45,21 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.mainContainer}>
       <FlatList
+        contentContainerStyle={{paddingTop: headerHeight}}
         data={questions}
         renderItem={renderItem}
+        ItemSeparatorComponent={separatorItem}
+        ListHeaderComponent={listHeader}
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: 100,
-    justifyContent: 'center',
-    padding: 16,
-    alignSelf: 'stretch',
-    margin: 8,
-    backgroundColor: 'white'
-  },
+const oldStyles = StyleSheet.create({
   title: {
     marginTop: 16,
     paddingVertical: 8,
