@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Dimensions, Text } from 'react-native'
 import textStyles from '../styles/textStyles'
 import OptionBox from './OptionBox'
+import styles from '../styles/styles'
 
 interface Props {
   item: any
@@ -18,33 +19,5 @@ const QuestionScreen: React.FC<Props> = ( {item} ) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  scrollItemView: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  container: {
-    height: 100,
-    justifyContent: 'center',
-    padding: 16,
-    alignSelf: 'stretch',
-    margin: 8,
-    backgroundColor: 'white'
-  },
-  item: {
-    padding: 16,
-    alignSelf: 'stretch',
-    marginVertical: 4,
-    marginHorizontal: 8,
-    backgroundColor: 'white'
-  },
-  title: {
-    fontSize: 24,
-  },
-  buttonText: {
-    fontSize: 16
-  }
-})
 
 export default QuestionScreen

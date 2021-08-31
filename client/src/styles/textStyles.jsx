@@ -7,6 +7,11 @@ const textStyles = StyleSheet.create({
       fontWeight: 'bold',
       fontSize: 40,
     },
+    smallTitle: {
+      color: colors.lightText,
+      fontWeight: 'bold',
+      fontSize: 24,
+    },
     subTitle: {
       color: colors.lightText,
       fontWeight: 'bold',

@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client"
 import React, { useState } from "react"
 import { Alert, Modal, StyleSheet, Text, Pressable, View, SafeAreaView, Dimensions } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
-import { GET_ALL_CATEGORIES } from "../utils/graphql/quories"
+import { GET_CATEGORIES } from "../utils/graphql/quories"
 
 const Test = (  ) => {
 
-  const { data } = useQuery(GET_ALL_CATEGORIES)
+  const { data } = useQuery(GET_CATEGORIES)
   console.log(data)
 
   

@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { View, Text, Pressable, FlatList, TextInput } from 'react-native'
 import { useHeaderHeight } from '@react-navigation/stack'
 import useCategories from '../hooks/useCategories'
 import styles from '../styles/styles'
@@ -13,7 +12,6 @@ interface Props {
 const Home: React.FC<Props> = ( {navigation} ) => {
 
   const { categories, loading } = useCategories()
-  const insets = useSafeAreaInsets()
   const headerHeight = useHeaderHeight()
 
   const renderItem = ( {item}: {item: any} ) => (
@@ -25,7 +23,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
   const listHeader = () => (
     <View>
       <Text style={textStyles.title}>Selaa</Text>
-      <View style={styles.searchBar}></View>
+      <TextInput autoCapitalize='none' autoCorrect={false} placeholder='Etsi lisää...' style={styles.searchBar}></TextInput>
       <Text style={{...textStyles.subTitle, marginBottom: 16}}>Lempparit</Text>
     </View>
   )
@@ -56,14 +54,5 @@ const Home: React.FC<Props> = ( {navigation} ) => {
     </View>
   )
 }
-
-const oldStyles = StyleSheet.create({
-  title: {
-    marginTop: 16,
-    paddingVertical: 8,
-    fontSize: 30,
-    fontWeight: "bold"
-  }
-})
 
 export default Home

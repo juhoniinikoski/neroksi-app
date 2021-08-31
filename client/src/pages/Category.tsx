@@ -28,7 +28,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const listHeader = () => (
     <View>
-      <Text style={textStyles.title}>{'📎 ' + title}</Text>
+      <Text style={textStyles.smallTitle}>{'📎  ' + title}</Text>
     </View>
   )
 
@@ -58,17 +58,5 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
     </View>
   )
 }
-
-const oldStyles = StyleSheet.create({
-  title: {
-    marginTop: 16,
-    paddingVertical: 8,
-    fontSize: 30,
-    fontWeight: "bold"
-  },
-  buttonText: {
-    fontSize: 16
-  },
-})
 
 export default Category
