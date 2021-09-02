@@ -14,7 +14,7 @@ const FormikTextInput = ({ name, style, placeholder, ...props }) => {
       <TextInput
         placeholder={placeholder}
         style={style}
-        multiline={true}
+        multiline={name === 'category' ? false : true}
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Pressable, FlatList, TextInput } from 'react-native'
 import { useHeaderHeight } from '@react-navigation/stack'
-import useCategories from '../hooks/useCategories'
+import useUserCategories from '../hooks/useCategories'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 
@@ -11,7 +11,7 @@ interface Props {
 
 const Home: React.FC<Props> = ( {navigation} ) => {
 
-  const { categories, loading } = useCategories()
+  const { categories, loading } = useUserCategories()
   const headerHeight = useHeaderHeight()
 
   const renderItem = ( {item}: {item: any} ) => (

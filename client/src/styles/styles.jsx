@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     },
     questionForm: {
         paddingTop: 20,
+        fontSize: 16,
         paddingBottom: 20,
         paddingHorizontal: 20,
         height: 180,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     },
     answerForm: {
         paddingTop: 20,
+        fontSize: 16,
         paddingBottom: 20,
         paddingHorizontal: 20,
         height: 95,
