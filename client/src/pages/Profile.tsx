@@ -109,15 +109,16 @@ const Profile: React.FC<Props> = () => {
 
 	const headerHeight = useHeaderHeight()
 
-	const onSubmit = (values: any) => {
+	const onSubmit = (values: any, resetForm: () => void) => {
     values.answers[values.correct].correct = true
 		console.log(values)
+    resetForm()
 	}
 
 	return (
 		<View style={styles.mainContainer}>
 			<ScrollView style={{ flex: 1, alignSelf: 'stretch' }} contentContainerStyle={{paddingTop: headerHeight}}>
-				<Formik initialValues={initialValues} onSubmit={onSubmit}>
+				<Formik initialValues={initialValues} onSubmit={(values, { resetForm }) => {onSubmit(values, resetForm)}}>
 					{({ handleSubmit, resetForm, values }) => <AddQuestion onSubmit={handleSubmit} values={values} resetForm={resetForm}/>}
 				</Formik>
 			</ScrollView>
