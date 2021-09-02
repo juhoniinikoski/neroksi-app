@@ -7,7 +7,8 @@ const colors = {
     box: '#FFFFFF',
     submit: '#6BBC56',
     correct: '#4EC06E',
-    false: '#EC2222'
+    false: '#EC2222',
+    disabled: '#999999'
 }
 
 export default colors

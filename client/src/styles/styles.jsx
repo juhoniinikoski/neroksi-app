@@ -88,6 +88,13 @@ const styles = StyleSheet.create({
         width: 50,
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    correctAns: {
+        height: 25,
+        width: 25,
+        backgroundColor: 'white',
+        marginRight: 36,
+        borderRadius: 50
     }
 })
 
