@@ -1,19 +1,29 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Question from '../pages/Question'
 import { TabNav } from './rootTab'
-import colors from '../styles/colorStyles'
+import SignInScreen from '../pages/SingIn'
 
 const Stack = createStackNavigator()
 
-export const RootStack = () => {
+export const RootStack = (userToken: any) => {
+
+  console.log(userToken)
+
   return (
-    <SafeAreaProvider style={{ backgroundColor: colors.background }}>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name='Home' component={TabNav} options={{headerShown: false}}/>
-        <Stack.Screen name='Question' component={Question} options={{headerShown: false}}/>
-      </Stack.Navigator>
-    </SafeAreaProvider>
+    <Stack.Navigator>
+      {userToken.userToken == null ? (
+        <>
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          {/* <Stack.Screen name="SignUp" component={SignUpScreen} /> */}
+          {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
+        </>
+      ) : (
+        <>
+          <Stack.Screen name='Home' component={TabNav} options={{headerShown: false}}/>
+          <Stack.Screen name='Question' component={Question} options={{headerShown: false}}/>
+        </>
+      )}
+    </Stack.Navigator>
   )
 }

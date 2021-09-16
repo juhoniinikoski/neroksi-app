@@ -66,7 +66,11 @@ const AddQuestion: React.FC<Props> = () => {
 
 	return (
 		<View style={styles.mainContainer}>
-			<ScrollView style={{ flex: 1, alignSelf: 'stretch' }} contentContainerStyle={{paddingTop: headerHeight}}>
+			<ScrollView
+        style={{ flex: 1, alignSelf: 'stretch' }}
+        contentContainerStyle={{paddingTop: headerHeight}}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
 				<Formik initialValues={initialValues} onSubmit={(values, { resetForm }) => {onSubmit(values, resetForm)}}>
 					{({ handleSubmit, resetForm, values, setFieldValue }) => <QuestionForm onSubmit={handleSubmit} values={values} setFieldValue={setFieldValue}/>}
 				</Formik>

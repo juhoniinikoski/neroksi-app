@@ -5,11 +5,11 @@ const styles = StyleSheet.create({
     mainContainer: {
         marginHorizontal: 16,
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'stretch',
         justifyContent: 'center'
     },
     whiteBox: {
-        backgroundColor: colors.box,
+        backgroundColor: colors.light,
     },
     category: {
         justifyContent: 'center',
@@ -25,27 +25,35 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'stretch',
         padding: 20,
-        marginVertical: 8,
         borderWidth: 3,
-        borderColor: 'white',
+        borderColor: colors.light,
         borderRadius: 12
+    },
+    checkIcon: {
+        marginBottom: -16,
+        zIndex: 1000,
+        height: 32,
+        alignItems: 'flex-end',
+        shadowOffset: {width: 4, height: 2},
+        shadowRadius: 6,
+        shadowOpacity: .4
     },
     scrollItemView: {
         alignItems: 'center',
+        alignSelf: 'stretch',
         justifyContent: 'center'
     },
     separator: {
         flex: 1, 
         borderWidth: 1, 
-        borderColor: 'rgba(255, 255, 255, .25)'
+        borderColor: colors.separator
     },
     searchBar: {
         paddingHorizontal: 20,
         fontSize: 16,
         flex: 1,
         height: 44,
-        backgroundColor: 'white',
-        marginTop: 24,
+        backgroundColor: colors.light,
         marginBottom: 36,
         borderRadius: 12
     },
@@ -56,7 +64,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 180,
         borderRadius: 16,
-        backgroundColor: 'white',
+        backgroundColor: colors.light,
         marginBottom: 36,
         marginTop: 24
     },
@@ -67,7 +75,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         height: 95,
         borderRadius: 16,
-        backgroundColor: 'white',
+        backgroundColor: colors.light,
         marginVertical: 8
     },
     submitButton: {
@@ -94,7 +102,7 @@ const styles = StyleSheet.create({
     correctAns: {
         height: 25,
         width: 25,
-        backgroundColor: 'white',
+        backgroundColor: colors.light,
         marginRight: 36,
         borderRadius: 50
     }

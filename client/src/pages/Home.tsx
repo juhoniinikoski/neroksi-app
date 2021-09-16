@@ -43,6 +43,8 @@ const Home: React.FC<Props> = ( {navigation} ) => {
   return (
     <View style={{...styles.mainContainer}}>
       <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         data={categories}
         contentContainerStyle={{paddingTop: headerHeight}}
         renderItem={renderItem}

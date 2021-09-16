@@ -12,8 +12,6 @@ const QuestionScreen: React.FC<Props> = ( {item} ) => {
 
   const height = Dimensions.get('screen').height
 
-  console.log(item)
-
   return (
     <View style={{...styles.scrollItemView, height: height}}>
       <Text style={{...textStyles.subTitle, marginBottom: 24}}>{item.questionTitle}</Text>

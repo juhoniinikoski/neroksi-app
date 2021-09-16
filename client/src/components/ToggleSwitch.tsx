@@ -12,7 +12,6 @@ const ToggleSwitch: React.FC<{}> = () => {
       duration: 300,
       useNativeDriver: true,
     }).start()
-    console.log(toggleAnim)
 	}
 
   const fadeAnim = useRef(new Animated.Value(0)).current
@@ -24,7 +23,6 @@ const ToggleSwitch: React.FC<{}> = () => {
       duration: 500,
       useNativeDriver: true
     }).start()
-    console.log(fadeAnim)
   }
 
   return (

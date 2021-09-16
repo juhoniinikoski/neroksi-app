@@ -1,7 +1,6 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
-import { Text, StyleSheet, View, FlatList, Pressable } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Text, View, FlatList, Pressable } from 'react-native'
 import useQuestions from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
@@ -47,6 +46,8 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   return (
     <View style={styles.mainContainer}>
       <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
         contentContainerStyle={{paddingTop: headerHeight}}
         data={questions}
         renderItem={renderItem}
