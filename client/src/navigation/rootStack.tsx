@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Question from '../pages/Question'
 import { TabNav } from './rootTab'
 import SignInScreen from '../pages/SingIn'
+import Register from '../pages/Register'
 
 const Stack = createStackNavigator()
 
@@ -14,8 +15,8 @@ export const RootStack = (userToken: any) => {
     <Stack.Navigator>
       {userToken.userToken == null ? (
         <>
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-          {/* <Stack.Screen name="SignUp" component={SignUpScreen} /> */}
+          {/* <Stack.Screen name="SignIn" component={SignInScreen} /> */}
+          <Stack.Screen name="Register" component={Register} options={{headerTransparent: true, title: ''}}/>
           {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
         </>
       ) : (

@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 44,
         backgroundColor: colors.light,
+        marginTop: 16,
         marginBottom: 36,
         borderRadius: 12
     },
@@ -74,6 +75,15 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         paddingHorizontal: 20,
         height: 95,
+        borderRadius: 16,
+        backgroundColor: colors.light,
+        marginVertical: 8
+    },
+    registerForm: {
+        paddingTop: 20,
+        fontSize: 16,
+        paddingBottom: 20,
+        paddingHorizontal: 20,
         borderRadius: 16,
         backgroundColor: colors.light,
         marginVertical: 8
@@ -105,6 +115,14 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light,
         marginRight: 36,
         borderRadius: 50
+    },
+    signInForm: {
+        paddingHorizontal: 20,
+        fontSize: 16,
+        height: 44,
+        backgroundColor: colors.light,
+        marginTop: 16,
+        borderRadius: 12
     }
 })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
-import { Formik, useField } from 'formik'
+import { Formik } from 'formik'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
 import QuestionForm from '../components/QuestionForm'
