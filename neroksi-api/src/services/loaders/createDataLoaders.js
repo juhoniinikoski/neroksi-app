@@ -1,7 +1,7 @@
 import DataLoader from 'dataloader'
 import { camelCase, isArray, find, zipObject } from 'lodash'
-import Category from '../models/Category'
-import User from '../models/User'
+import Category from '../../models/Category'
+import User from '../../models/User'
 
 const jsonCacheKeyFn = value => JSON.stringify(value);
 

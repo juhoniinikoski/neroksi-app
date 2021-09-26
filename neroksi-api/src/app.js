@@ -1,18 +1,18 @@
-import Koa from 'koa';
-import cors from '@koa/cors';
-import morgan from 'koa-morgan';
-import bodyParser from 'koa-bodyparser';
-import { ApolloServer, toApolloError, ApolloError } from 'apollo-server-koa';
-import { ValidationError } from 'yup';
-import Router from 'koa-router';
-import through from 'through2';
+import Koa from 'koa'
+import cors from '@koa/cors'
+import morgan from 'koa-morgan'
+import bodyParser from 'koa-bodyparser'
+import { ApolloServer, toApolloError, ApolloError } from 'apollo-server-koa'
+import { ValidationError } from 'yup'
+import Router from 'koa-router'
+import through from 'through2'
 
-import { ApplicationError, NotFoundError } from './errors';
-import AuthService from './utils/authService';
-import createDataLoaders from './utils/createDataLoaders';
-import logger from './utils/logger';
-import api from './api';
-import schema from './graphql/schema';
+import { ApplicationError, NotFoundError } from './utils/errors'
+import AuthService from './services/authentication/authService'
+import createDataLoaders from './services/loaders/createDataLoaders'
+import logger from './utils/logger'
+import api from './api'
+import schema from './graphql/schema'
 
 const logStream = through(chunk => {
   logger.info(chunk.toString());

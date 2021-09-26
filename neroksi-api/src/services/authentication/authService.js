@@ -1,6 +1,6 @@
 import { AuthenticationError } from 'apollo-server';
 
-import { ACCESS_TOKEN_EXPIRATION_TIME } from '../config';
+import { ACCESS_TOKEN_EXPIRATION_TIME } from '../../utils/config';
 import signJwt from './signJwt';
 import verifyJwt from './verifyJwt';
 
