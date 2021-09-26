@@ -1,7 +1,7 @@
-import { gql, UserInputError } from 'apollo-server';
-import * as yup from 'yup';
-import bcrypt from 'bcrypt';
-import User from '../../models/User';
+import { gql, UserInputError } from 'apollo-server'
+import * as yup from 'yup'
+import bcrypt from 'bcrypt'
+import User from '../../models/User'
 
 export const typeDefs = gql`
   input AuthorizeInput {
@@ -21,7 +21,7 @@ export const typeDefs = gql`
     """
     authorize(credentials: AuthorizeInput): AuthorizationPayload
   }
-`;
+`
 
 const argsSchema = yup.object().shape({
   credentials: yup.object().shape({
@@ -35,7 +35,7 @@ const argsSchema = yup.object().shape({
       .required()
       .trim(),
   }),
-});
+})
 
 export const resolvers = {
   Mutation: {
@@ -44,18 +44,18 @@ export const resolvers = {
         credentials: { username, password },
       } = await argsSchema.validate(args, {
         stripUnknown: true,
-      });
+      })
 
-      const user = await User.query().findOne({ username });
+      const user = await User.query().findOne({ username })
 
       if (!user) {
-        throw new UserInputError('Invalid username or password');
+        throw new UserInputError('Invalid username or password')
       }
 
-      const match = await bcrypt.compare(password, user.password);
+      const match = await bcrypt.compare(password, user.password)
 
       if (!match) {
-        throw new UserInputError('Invalid username or password');
+        throw new UserInputError('Invalid username or password')
       }
 
       return {

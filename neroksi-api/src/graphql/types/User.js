@@ -9,7 +9,7 @@ export const typeDefs = gql`
     createdAt: DateTime!
     categories(first: Int, after: String): CategoryConnection!
   }
-`;
+`
 
 const argsSchema = yup.object({
   after: yup.string(),
@@ -18,13 +18,13 @@ const argsSchema = yup.object({
     .min(1)
     .max(30)
     .default(30),
-});
+})
 
 export const resolvers = {
   User: {
     categories: async ({ id }, args) => {
 
-      const { first, after } = await argsSchema.validate(args);
+      const { first, after } = await argsSchema.validate(args)
 
       return Category.query()
         .where({
@@ -34,7 +34,7 @@ export const resolvers = {
           orderBy: [{ column: 'createdAt', order: 'desc' }, 'id'],
           first,
           after,
-        });
+        })
     },
     // categoryCount
   },
@@ -43,4 +43,4 @@ export const resolvers = {
 export default {
   typeDefs,
   resolvers,
-};
+}

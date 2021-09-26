@@ -1,7 +1,7 @@
-import Router from 'koa-router';
+import Router from 'koa-router'
 
-const router = new Router();
+const router = new Router()
 
-router.use();
+router.use()
 
-export default router;
+export default router

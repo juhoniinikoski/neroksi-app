@@ -9,7 +9,7 @@ export const typeDefs = gql`
     """
     categories(first: Int, after: String): CategoryConnection!
   }
-`;
+`
 
 const argsSchema = yup.object({
   after: yup.string(),
@@ -18,24 +18,24 @@ const argsSchema = yup.object({
     .min(1)
     .max(30)
     .default(30),
-});
+})
 
 export const resolvers = {
   Query: {
     categories: async (obj, args) => {
 
-      const { first, after } = await argsSchema.validate(args);
+      const { first, after } = await argsSchema.validate(args)
 
       return Category.query().cursorPaginate({
         orderBy: [{ column: 'createdAt', order: 'desc' }, 'id'],
         first,
         after,
-      });
+      })
     },
   },
-};
+}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

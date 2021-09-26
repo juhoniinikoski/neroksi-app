@@ -20,7 +20,7 @@ const argsSchema = yup.object().shape({
       .max(2000)
       .trim(),
   }),
-});
+})
 
 export const resolvers = {
   Mutation: {
@@ -35,13 +35,13 @@ export const resolvers = {
       return Category.query().insertAndFetch({
         id: uuid(),
         userId: authorizedUser.id,
-        categoryTitle: category.categoryTitle,
-      });
+        categoryTitle: category.categoryTitle
+      })
     },
   },
-};
+}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

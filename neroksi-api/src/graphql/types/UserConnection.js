@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
   type UserEdge {
@@ -11,11 +11,11 @@ export const typeDefs = gql`
     pageInfo: PageInfo!
     edges: [UserEdge!]!
   }
-`;
+`
 
-export const resolvers = {};
+export const resolvers = {}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

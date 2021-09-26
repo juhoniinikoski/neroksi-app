@@ -15,35 +15,35 @@ import api from './api'
 import schema from './graphql/schema'
 
 const logStream = through(chunk => {
-  logger.info(chunk.toString());
-});
+  logger.info(chunk.toString())
+})
 
 const errorHandler = () => async (ctx, next) => {
   try {
-    await next();
+    await next()
   } catch (e) {
     const normalizedError =
       e instanceof ApplicationError
         ? e
-        : new ApplicationError('Something went wrong');
+        : new ApplicationError('Something went wrong')
 
-    ctx.status = normalizedError.status || 500;
-    ctx.body = normalizedError;
+    ctx.status = normalizedError.status || 500
+    ctx.body = normalizedError
 
-    logger.error(e, { path: ctx.request.path });
+    logger.error(e, { path: ctx.request.path })
   }
-};
+}
 
 const apolloErrorFormatter = error => {
-  logger.error(error);
+  logger.error(error)
 
-  const { originalError } = error;
-  const isGraphQLError = !(originalError instanceof Error);
+  const { originalError } = error
+  const isGraphQLError = !(originalError instanceof Error)
 
   let normalizedError = new ApolloError(
     'Something went wrong',
     'INTERNAL_SERVER_ERROR',
-  );
+  )
 
   if (originalError instanceof ValidationError) {
     normalizedError = toApolloError(error, 'BAD_USER_INPUT');
@@ -52,9 +52,9 @@ const apolloErrorFormatter = error => {
   }
 
   return normalizedError;
-};
+}
 
-const app = new Koa();
+const app = new Koa()
 
 const apolloServer = new ApolloServer({
   schema,
@@ -62,10 +62,10 @@ const apolloServer = new ApolloServer({
   introspection: true,
   formatError: apolloErrorFormatter,
   context: ({ ctx }) => {
-    const authorization = ctx.request.get('authorization');
+    const authorization = ctx.request.get('authorization')
 
-    const accessToken = authorization ? authorization.split(' ')[1] : undefined;
-    const dataLoaders = createDataLoaders();
+    const accessToken = authorization ? authorization.split(' ')[1] : undefined
+    const dataLoaders = createDataLoaders()
 
     return {
       authService: new AuthService({
@@ -73,32 +73,32 @@ const apolloServer = new ApolloServer({
         dataLoaders,
       }),
       dataLoaders,
-    };
+    }
   },
-});
+})
 
-app.use(bodyParser());
-app.use(errorHandler());
+app.use(bodyParser())
+app.use(errorHandler())
 
-app.use(morgan('combined', { stream: logStream }));
+app.use(morgan('combined', { stream: logStream }))
 
 app.use(async (ctx, next) => {
-  ctx.dataLoaders = createDataLoaders();
-  await next();
-});
+  ctx.dataLoaders = createDataLoaders()
+  await next()
+})
 
-app.use(cors());
+app.use(cors())
 
-const apiRouter = new Router();
+const apiRouter = new Router()
 
-apiRouter.use('/api', api.routes());
+apiRouter.use('/api', api.routes())
 
-app.use(apiRouter.routes());
+app.use(apiRouter.routes())
 
-apolloServer.applyMiddleware({ app });
+apolloServer.applyMiddleware({ app })
 
 app.use(ctx => {
-  throw new NotFoundError(`The path "${ctx.request.path}" is not found`);
-});
+  throw new NotFoundError(`The path "${ctx.request.path}" is not found`)
+})
 
-export default app;
+export default app

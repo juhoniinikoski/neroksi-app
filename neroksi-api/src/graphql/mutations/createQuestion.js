@@ -18,6 +18,12 @@ export const typeDefs = gql`
   }
 `
 
+const answers = {
+  ans1: "vastaus1",
+  ans2: "vastaus2",
+  ans3: "vastaus3"
+}
+
 const argsSchema = yup.object().shape({
   question: yup.object().shape({
     categoryName: yup
@@ -30,17 +36,17 @@ const argsSchema = yup.object().shape({
       .max(2000)
       .trim(),
   }),
-});
+})
 
 export const resolvers = {
   Mutation: {
     createQuestion: async (obj, args, { authService }) => {
 
-      const authorizedUser = await authService.getAuthorizedUserOrFail();
+      const authorizedUser = await authService.getAuthorizedUserOrFail()
 
       const { question } = await argsSchema.validate(args, {
         stripUnknown: true,
-      });
+      })
 
       const { categoryName } = question
 
@@ -55,7 +61,8 @@ export const resolvers = {
         userId: authorizedUser.id,
         categoryId,
         questionTitle: question.questionTitle,
-      });
+        answers: JSON.stringify(answers)
+      })
     },
   },
 };
@@ -63,4 +70,4 @@ export const resolvers = {
 export default {
   typeDefs,
   resolvers,
-};
+}

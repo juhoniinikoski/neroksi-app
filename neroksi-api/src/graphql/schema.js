@@ -1,5 +1,5 @@
-import { makeExecutableSchema, gql } from 'apollo-server';
-import { merge } from 'lodash';
+import { makeExecutableSchema, gql } from 'apollo-server'
+import { merge } from 'lodash'
 
 import User from './types/User'
 import createUserMutation from './mutations/createUser'
@@ -29,7 +29,7 @@ const rootTypeDefs = gql`
   type Mutation {
     root: String
   }
-`;
+`
 
 const typeDefs = [
   rootTypeDefs,
@@ -52,7 +52,7 @@ const typeDefs = [
   categoriesQuery.typeDefs,
   createQuestionMutation.typeDefs,
   deleteQuestionMutation.typeDefs
-];
+]
 
 const resolvers = merge(
   QuestionConnection.resolvers,
@@ -74,11 +74,11 @@ const resolvers = merge(
   categoriesQuery.resolvers,
   createQuestionMutation.resolvers,
   deleteQuestionMutation.resolvers
-);
+)
 
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-});
+})
 
-export default schema;
+export default schema

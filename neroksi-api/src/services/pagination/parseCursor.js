@@ -1,13 +1,13 @@
 const parseCursor = cursor => {
   if (!cursor) {
-    return null;
+    return null
   }
 
   try {
-    return JSON.parse(Buffer.from(cursor, 'base64').toString('utf8'));
+    return JSON.parse(Buffer.from(cursor, 'base64').toString('utf8'))
   } catch (e) {
-    return null;
+    return null
   }
 };
 
-export default parseCursor;
+export default parseCursor

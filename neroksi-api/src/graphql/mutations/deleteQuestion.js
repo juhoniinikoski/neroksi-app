@@ -1,6 +1,5 @@
-import { gql, UserInputError, ForbiddenError } from 'apollo-server';
-
-import Question from '../../models/Question';
+import { gql, UserInputError, ForbiddenError } from 'apollo-server'
+import Question from '../../models/Question'
 
 export const typeDefs = gql`
   extend type Mutation {
@@ -9,7 +8,7 @@ export const typeDefs = gql`
     """
     deleteQuestion(id: ID!): Boolean
   }
-`;
+`
 
 export const resolvers = {
   Mutation: {
@@ -29,9 +28,9 @@ export const resolvers = {
 
       await Question.query()
         .findById(args.id)
-        .delete();
+        .delete()
 
-      return true;
+      return true
     },
   },
 };
@@ -39,4 +38,4 @@ export const resolvers = {
 export default {
   typeDefs,
   resolvers,
-};
+}

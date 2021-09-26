@@ -11,6 +11,7 @@ exports.up = function(knex) {
       .onDelete('cascade');
     table.integer('rating');
     table.text('question_title');
+    table.json('answers')
     table.timestamp('created_at');
     table.timestamp('updated_at');
 

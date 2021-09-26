@@ -29,7 +29,7 @@ export const resolvers = {
 
     questions: async ({ id }, args) => {
 
-      const { first, after } = await argsSchema.validate(args);
+      const { first, after } = await argsSchema.validate(args)
 
       return Question.query()
         .where({
@@ -39,7 +39,7 @@ export const resolvers = {
           orderBy: [{ column: 'createdAt', direction: 'desc' }, 'id'],
           first,
           after,
-        });
+        })
     },
   },
 };
@@ -47,4 +47,4 @@ export const resolvers = {
 export default {
   typeDefs,
   resolvers,
-};
+}

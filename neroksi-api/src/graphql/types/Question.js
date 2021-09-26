@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
 type Question {
@@ -8,9 +8,10 @@ type Question {
   userId: String!
   categoryId: String!
   createdAt: DateTime!
+  answers: String
   questionTitle: String
 }
-`;
+`
 
 export const resolvers = {
   Question: {
@@ -22,9 +23,9 @@ export const resolvers = {
       { dataLoaders: { categoryLoader } },
     ) => categoryLoader.load(categoryId),
   },
-};
+}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

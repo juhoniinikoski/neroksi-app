@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
   type QuestionEdge {
@@ -13,9 +13,9 @@ export const typeDefs = gql`
   }
 `;
 
-export const resolvers = {};
+export const resolvers = {}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

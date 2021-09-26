@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
   extend type Query {
@@ -7,17 +7,17 @@ export const typeDefs = gql`
     """
     authorizedUser: User
   }
-`;
+`
 
 export const resolvers = {
   Query: {
     authorizedUser: (obj, args, { authService }) => {
-      return authService.getAuthorizedUser();
+      return authService.getAuthorizedUser()
     },
   },
-};
+}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

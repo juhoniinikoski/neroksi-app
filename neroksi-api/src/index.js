@@ -4,8 +4,8 @@ import logger from './utils/logger'
 import { PORT } from './utils/config'
 import app from './app'
 
-const server = http.createServer(app.callback()).listen(PORT);
+const server = http.createServer(app.callback()).listen(PORT)
 
 server.on('listening', () => {
-  logger.info(`Server listening to port ${PORT}`);
-});
+  logger.info(`Server listening to port ${PORT}`)
+})

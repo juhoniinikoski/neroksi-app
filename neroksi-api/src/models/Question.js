@@ -1,14 +1,14 @@
-import BaseModel from './BaseModel';
-import knex from '../utils/knex';
+import BaseModel from './BaseModel'
+import knex from '../utils/knex'
 
 class Question extends BaseModel {
   static get idColumn() {
-    return 'id';
+    return 'id'
   }
 
   static get tableName() {
-    return 'questions';
+    return 'questions'
   }
 }
 
-export default Question.bindKnex(knex);
+export default Question.bindKnex(knex)

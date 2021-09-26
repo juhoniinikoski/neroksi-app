@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
   extend type Query {
@@ -7,16 +7,16 @@ export const typeDefs = gql`
     """
     category(id: ID!): Category
   }
-`;
+`
 
 export const resolvers = {
   Query: {
     category: async (obj, args, { dataLoaders: { categoryLoader } }) =>
       categoryLoader.load(args.id),
   },
-};
+}
 
 export default {
   typeDefs,
   resolvers,
-};
+}

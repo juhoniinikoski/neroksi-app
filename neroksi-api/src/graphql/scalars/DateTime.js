@@ -1,13 +1,13 @@
-import { GraphQLScalarType, Kind } from 'graphql';
-import { gql } from 'apollo-server';
-import { isValid, isDate } from 'date-fns';
+import { GraphQLScalarType, Kind } from 'graphql'
+import { gql } from 'apollo-server'
+import { isValid, isDate } from 'date-fns'
 
 const isValidDateTime = value => {
   const isSerializable =
-    isDate(value) || typeof value === 'string' || typeof value === 'number';
+    isDate(value) || typeof value === 'string' || typeof value === 'number'
 
-  return isSerializable ? isValid(new Date(value)) : false;
-};
+  return isSerializable ? isValid(new Date(value)) : false
+}
 
 const config = {
   name: 'DateTime',
@@ -18,16 +18,16 @@ const config = {
     'of dates and times using the Gregorian calendar.',
   serialize(value) {
     if (isValidDateTime(value)) {
-      return new Date(value).toISOString();
+      return new Date(value).toISOString()
     }
 
     throw new TypeError(
       `DateTime can not be serialized from ${JSON.stringify(value)}`,
-    );
+    )
   },
   parseValue(value) {
     if (isValidDateTime(value)) {
-      return new Date(value);
+      return new Date(value)
     }
 
     throw new TypeError(
@@ -40,30 +40,30 @@ const config = {
         `DateTime cannot represent non string type ${String(
           ast.value != null ? ast.value : null,
         )}`,
-      );
+      )
     }
 
-    const { value } = ast;
+    const { value } = ast
 
     if (isValidDateTime(value)) {
-      return new Date(value);
+      return new Date(value)
     }
 
     throw new TypeError(
       `DateTime can not be parsed from ${JSON.stringify(value)}`,
-    );
+    )
   },
-};
+}
 
 export const resolvers = {
   DateTime: new GraphQLScalarType(config),
-};
+}
 
 export const typeDefs = gql`
   scalar DateTime
-`;
+`
 
 export default {
   resolvers,
   typeDefs,
-};
+}
