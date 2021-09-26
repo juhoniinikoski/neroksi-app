@@ -4,9 +4,6 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
 const config = require('./config/config')
-const Category = require('./models/category')
-const Question = require('./models/question')
-const User = require('./models/user')
 
 app.use(cors())
 

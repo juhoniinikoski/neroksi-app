@@ -4,8 +4,9 @@ const schema = require('./api/schema')
 const app = require('./app')
 const jwt = require('jsonwebtoken')
 const User = require('./models/user')
+const config = require('./config/config')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+const JWT_SECRET = config.JWT_SECRET
 
 const server = new ApolloServer({ schema, context: async ({ req }) => {
   const auth = req ? req.headers.authorization : null

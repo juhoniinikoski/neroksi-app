@@ -1,8 +1,9 @@
 const { gql } = require('apollo-server-express')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+const JWT_SECRET = config.JWT_SECRET
 
 const typeDefs = gql`
 
@@ -32,12 +33,14 @@ const typeDefs = gql`
 `
 const resolvers = {
   Query: {
+
     me: (root, args, context) => {
       return context.currentUser
     }
   },
 
   Mutation: {
+
     createUser: (root, args) => {
       const user = new User({ username: args.username })
   
