@@ -8,7 +8,7 @@ type Question {
   userId: String!
   categoryId: String!
   createdAt: DateTime!
-  answers: String
+  answers: [Answer]
   questionTitle: String
 }
 `
@@ -22,6 +22,7 @@ export const resolvers = {
       args,
       { dataLoaders: { categoryLoader } },
     ) => categoryLoader.load(categoryId),
+    answers: ( {answers} ) => JSON.parse(answers).map(a => ({id: a.id, answer: a.answer, correct: a.correct}))
   },
 }
 

@@ -6,27 +6,27 @@ import Question from '../../models/Question'
 
 export const typeDefs = gql`
   input CreateQuestionInput {
-    categoryName: String!
-    questionTitle: String
+    categoryTitle: String!
+    questionTitle: String!
+    answers: [String!]!
+    correctId: Int!
   }
 
   extend type Mutation {
     """
-    Creates a question for the given category defined by rcategoryName.
+    Creates a question for the given category defined by categoryTitle.
     """
     createQuestion(question: CreateQuestionInput): Question
   }
 `
 
-const answers = {
-  ans1: "vastaus1",
-  ans2: "vastaus2",
-  ans3: "vastaus3"
-}
+const answers = ["vastaus1", "vastaus2", "vastaus3"]
+const correctID = 1
+
 
 const argsSchema = yup.object().shape({
   question: yup.object().shape({
-    categoryName: yup
+    categoryTitle: yup
       .string()
       .required()
       .lowercase()
@@ -35,6 +35,10 @@ const argsSchema = yup.object().shape({
       .string()
       .max(2000)
       .trim(),
+    answers: yup
+      .array(yup.string()),
+    correctId: yup
+      .number()
   }),
 })
 
@@ -48,11 +52,14 @@ export const resolvers = {
         stripUnknown: true,
       })
 
-      const { categoryName } = question
+      const { categoryTitle, questionTitle, answers, correctId } = question
 
       const existingCategory = await Category.query().findOne({
-        categoryTitle: categoryName
+        categoryTitle: categoryTitle
       })
+
+      const answersObjects = answers
+        .map((a, index) => ({id: index, answer: a, correct: index === correctId ? true : false}))
 
       const categoryId = existingCategory.id
 
@@ -60,8 +67,8 @@ export const resolvers = {
         id: uuid(),
         userId: authorizedUser.id,
         categoryId,
-        questionTitle: question.questionTitle,
-        answers: JSON.stringify(answers)
+        questionTitle: questionTitle,
+        answers: JSON.stringify(answersObjects)
       })
     },
   },

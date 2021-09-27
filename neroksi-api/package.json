@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r esm ./src/index.js",
-    "start:dev": "nodemon -r esm ./src/index.js",
+    "dev": "nodemon -r esm ./src/index.js",
     "lint": "eslint ./src",
     "test": "jest .",
     "migrate:make": "knex migrate:make",
