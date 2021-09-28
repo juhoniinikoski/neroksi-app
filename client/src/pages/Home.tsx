@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, Pressable, FlatList, TextInput } from 'react-native'
 import { useHeaderHeight } from '@react-navigation/stack'
-import useUserCategories from '../hooks/useCategories'
+import useUserCategories from '../hooks/useUserCategories'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
+import useCategories from '../hooks/useCategories'
 
 interface Props {
   navigation: any
@@ -11,8 +12,10 @@ interface Props {
 
 const Home: React.FC<Props> = ( {navigation} ) => {
 
-  const { categories, loading } = useUserCategories()
+  const { categories, loading } = useCategories("ASC", "")
   const headerHeight = useHeaderHeight()
+
+  const parsedCategories = categories ? categories.map((c: any) => c.node) : undefined
 
   const renderItem = ( {item}: {item: any} ) => (
     <Pressable onPress={() => navigation.navigate('Category', {category: item})} style={styles.category}>
@@ -45,7 +48,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
-        data={categories}
+        data={parsedCategories}
         contentContainerStyle={{paddingTop: headerHeight}}
         renderItem={renderItem}
         ItemSeparatorComponent={separatorItem}

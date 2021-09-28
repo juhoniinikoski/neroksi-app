@@ -20,16 +20,11 @@ export const typeDefs = gql`
   }
 `
 
-const answers = ["vastaus1", "vastaus2", "vastaus3"]
-const correctID = 1
-
-
 const argsSchema = yup.object().shape({
   question: yup.object().shape({
     categoryTitle: yup
       .string()
       .required()
-      .lowercase()
       .trim(),
     questionTitle: yup
       .string()
@@ -57,6 +52,8 @@ export const resolvers = {
       const existingCategory = await Category.query().findOne({
         categoryTitle: categoryTitle
       })
+
+      console.log(categoryTitle)
 
       const answersObjects = answers
         .map((a, index) => ({id: index, answer: a, correct: index === correctId ? true : false}))

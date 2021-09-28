@@ -6,7 +6,7 @@ import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'
 import colors from '../styles/colorStyles'
-import useUserCategories from '../hooks/useCategories'
+import useUserCategories from '../hooks/useUserCategories'
 
 interface Props {
     onSubmit: () => void

@@ -12,11 +12,13 @@ interface Props {
 
 const Category: React.FC<Props> = ( {route, navigation} ) => {
 
-  const id = parseInt(route.params.category.id)
+  const id = route.params.category.id
   const title = route.params.category.categoryTitle
 
-  const { questions, loading } = useQuestions(id)
+  const { questions, loading } = useQuestions("ASC", "", id)
   const headerHeight = useHeaderHeight()
+
+  const parsedQuestions = questions ? questions.map((q: any) => q.node) : undefined
 
   const renderItem = ( {item, index}: {item: any, index: number} ) => (
     <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index
@@ -49,7 +51,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{paddingTop: headerHeight}}
-        data={questions}
+        data={parsedQuestions}
         renderItem={renderItem}
         ItemSeparatorComponent={separatorItem}
         ListHeaderComponent={listHeader}

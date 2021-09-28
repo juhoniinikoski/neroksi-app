@@ -1,19 +1,46 @@
-import { useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_CATEGORIES } from '../utils/graphql/quories'
+import {GET_CATEGORIES} from '../utils/graphql/quories'
+import parseSortBy from "../utils/parseSortBy";
 
-const useUserCategories = () => {
+// const useCategories = (sortBy: any, filterText: string) => {
+const useCategories = (sortBy: string, filterText: string) => {
 
-  const [categories, setCategories] = useState([])
+  const sortVariables = parseSortBy(sortBy);
 
-  const { error, loading } = useQuery(GET_CATEGORIES, {
+  const queryVariables = {
+    ...sortVariables,
+    searchKeyword: filterText,
+    first: 2,
+  };
+
+  const handleFetchMore = () => {
+    const canFetchMore =
+      !loading && data && data.categories.pageInfo.hasNextPage;
+
+    if (!canFetchMore) {
+      return;
+    }
+
+    fetchMore({
+      query: GET_CATEGORIES,
+      variables: {
+        after: data.categories.pageInfo.endCursor,
+        ...queryVariables,
+      },
+    });
+  };
+
+  const { data, loading, fetchMore, ...result } = useQuery(GET_CATEGORIES, {
+    variables: queryVariables,
     fetchPolicy: "cache-and-network",
-    onCompleted: (data) => {
-      setCategories(data.categories)
-    },
-  })
+  });
 
-  return { categories, loading, error }
-}
+  return {
+    categories: data ? data.categories.edges : undefined,
+    fetchMore: handleFetchMore,
+    loading,
+    ...result,
+  };
+};
 
-export default useUserCategories
+export default useCategories

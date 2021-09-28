@@ -21,6 +21,7 @@ import QuestionConnection from './types/QuestionConnection'
 import createQuestionMutation from './mutations/createQuestion'
 import deleteQuestionMutation from './mutations/deleteQuestion'
 import Answer from './types/Answer'
+import questionQuery from './queries/questions'
 
 const rootTypeDefs = gql`
   type Query {
@@ -54,6 +55,7 @@ const typeDefs = [
   createQuestionMutation.typeDefs,
   deleteQuestionMutation.typeDefs,
   Answer.typeDefs,
+  questionQuery.typeDefs,
 ]
 
 const resolvers = merge(
@@ -77,6 +79,7 @@ const resolvers = merge(
   createQuestionMutation.resolvers,
   deleteQuestionMutation.resolvers,
   Answer.resolvers,
+  questionQuery.resolvers,
 )
 
 const schema = makeExecutableSchema({

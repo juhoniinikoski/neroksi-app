@@ -4,19 +4,24 @@ import Question from '../pages/Question'
 import { TabNav } from './rootTab'
 import SignInScreen from '../pages/SingIn'
 import Register from '../pages/Register'
+import Test from '../pages/Test'
 
 const Stack = createStackNavigator()
 
 export const RootStack = (userToken: any) => {
 
-  console.log(userToken)
+  // console.log(userToken)
+
+  const joku = "moi"
 
   return (
+    // <Test />
     <Stack.Navigator>
-      {userToken.userToken == null ? (
+      {/* {userToken.userToken == null ? ( */}
+      {joku == null ? (
         <>
-          {/* <Stack.Screen name="SignIn" component={SignInScreen} /> */}
-          <Stack.Screen name="Register" component={Register} options={{headerTransparent: true, title: ''}}/>
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          {/* <Stack.Screen name="Register" component={Register} options={{headerTransparent: true, title: ''}}/> */}
           {/* <Stack.Screen name="ResetPassword" component={ResetPassword} /> */}
         </>
       ) : (
