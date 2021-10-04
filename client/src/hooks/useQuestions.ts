@@ -1,34 +1,29 @@
 import { useQuery } from '@apollo/client'
 import {GET_QUESTIONS} from '../utils/graphql/quories'
-import parseSortBy from "../utils/parseSortBy";
 
-const useQuestions = (sortBy: string, filterText: string, categoryId: string) => {
-
-  const sortVariables = parseSortBy(sortBy);
+const useQuestions = (id: string) => {
 
   const queryVariables = {
-    ...sortVariables,
-    categoryId,
-    searchKeyword: filterText,
-    first: 2,
-  };
+    id,
+    first: 3,
+  }
 
   const handleFetchMore = () => {
     const canFetchMore =
-      !loading && data && data.questions.pageInfo.hasNextPage;
+      !loading && data && data.category.questions.pageInfo.hasNextPage
 
     if (!canFetchMore) {
-      return;
+      return
     }
 
     fetchMore({
       query: GET_QUESTIONS,
       variables: {
-        after: data.questions.pageInfo.endCursor,
+        after: data.category.questions.pageInfo.endCursor,
         ...queryVariables,
       },
-    });
-  };
+    })
+  }
 
   const { data, loading, fetchMore, ...result } = useQuery(GET_QUESTIONS, {
     variables: queryVariables,
@@ -36,9 +31,9 @@ const useQuestions = (sortBy: string, filterText: string, categoryId: string) =>
   });
 
   return {
-    questions: data ? data.questions.edges : undefined,
-    fetchMore: handleFetchMore,
+    questions: data ? data.category.questions.edges : undefined,
     loading,
+    fetchMore: handleFetchMore,
     ...result,
   };
 };

@@ -15,7 +15,7 @@ const QuestionScreen: React.FC<Props> = ( {item} ) => {
   return (
     <View style={{...styles.scrollItemView, height: height}}>
       <Text style={{...textStyles.subTitle, marginBottom: 24}}>{item.questionTitle}</Text>
-      {item.answers.map((ans: any) => <OptionBox key={ans.ans} item={ans}/>)}
+      {item.answers.map((ans: any) => <OptionBox key={ans.id} item={ans}/>)}
     </View>
   )
 }

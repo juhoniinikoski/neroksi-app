@@ -40,7 +40,7 @@ const OptionBox: React.FC<Props> = ( {item} ) => {
       </View>
       <Pressable onPress={() => checkAnswer(item)} style={item.id === selected ? {...styles.questionBox, backgroundColor: 'white'} : styles.questionBox}>
         <View>
-          <Text style={item.id === selected ? {...textStyles.bodyText, color: colors.background} : textStyles.bodyText}>{item.ans}</Text>
+          <Text style={item.id === selected ? {...textStyles.bodyText, color: colors.background} : textStyles.bodyText}>{item.answer}</Text>
         </View>
       </Pressable>
     </View>

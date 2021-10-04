@@ -4,6 +4,8 @@ import { HomeStack } from "./homeStack"
 import { ProfileStack } from "./profileStack"
 import { FontAwesome5 } from '@expo/vector-icons'
 import { View } from "react-native"
+import BottomNavBar from "../components/BottomNavBar"
+
 
 const Tabs = createBottomTabNavigator()
 
@@ -11,29 +13,18 @@ const Tabs = createBottomTabNavigator()
 // check ways to make navigation simpler
 
 export const TabNav = () => (
-  <Tabs.Navigator
-    tabBarOptions={{
-      showLabel: false,
-      safeAreaInsets: {bottom: 0, top: 0},
-      style: {
-        position: 'absolute',
-        alignSelf: 'center',
-        bottom: 35,
-        height: 64,
-        borderRadius: 50,
-        marginHorizontal: 64,
-        alignItems: 'center',
-        justifyContent: 'center'
-      }
-    }}>
-    {/* <Tabs.Screen name="Test" component={Test} /> */}
-    <Tabs.Screen
-      name="Home"
-      component={HomeStack}
-      options={{tabBarIcon: () => <View style={{backgroundColor: 'red', height: 25, width: 25}}></View>}}/>
-    <Tabs.Screen
-      name="Profile"
-      component={ProfileStack}
-      options={{tabBarIcon: () => <View style={{backgroundColor: 'red', height: 25, width: 25}}></View>}}/>
+  <Tabs.Navigator 
+  tabBar={props => <BottomNavBar {...props}  />}
+  tabBarOptions={{
+    style: {
+      borderTopWidth: 0,
+      backgroundColor: '',
+      elevation: 0, // this solved the triangle type view problem in android
+      position: "absolute"
+    },
+  }}
+  >
+    <Tabs.Screen name="Home" component={HomeStack}/>
+    <Tabs.Screen name="Profile" component={ProfileStack}/>
   </Tabs.Navigator>
 )

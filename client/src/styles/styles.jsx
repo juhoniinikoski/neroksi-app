@@ -14,12 +14,53 @@ const styles = StyleSheet.create({
     category: {
         justifyContent: 'center',
         paddingVertical: 16,
-        backgroundColor: 'transparent'
+        paddingHorizontal: 16,
+        backgroundColor: colors.lightBackground
+    },
+    firstCategory: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        justifyContent: 'center',
+        paddingHorizontal: 16,
+        paddingTop: 24,
+        paddingBottom: 16,
+        backgroundColor: colors.lightBackground
+    },
+    lastCategory: {
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        justifyContent: 'center',
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingBottom: 24,
+        backgroundColor: colors.lightBackground
     },
     question: {
         justifyContent: 'center',
         alignSelf: 'stretch',
-        paddingVertical: 16
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        backgroundColor: colors.lightBackground
+    },
+    firstQuestion: {
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        paddingTop: 24,
+        paddingBottom: 16,
+        paddingHorizontal: 16,
+        backgroundColor: colors.lightBackground,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    lastQuestion: {
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        paddingTop: 16,
+        paddingBottom: 24,
+        paddingHorizontal: 16,
+        backgroundColor: colors.lightBackground,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
     },
     questionBox: {
         justifyContent: 'center',
@@ -45,8 +86,15 @@ const styles = StyleSheet.create({
     },
     separator: {
         flex: 1, 
-        borderWidth: 1, 
+        borderWidth: 1,
+        marginVertical: -1,
+        marginLeft: 48,
         borderColor: colors.separator
+    },
+    bigSeparator: {
+        flex: 1, 
+        borderWidth: 4,
+        borderColor: colors.background
     },
     searchBar: {
         paddingHorizontal: 20,

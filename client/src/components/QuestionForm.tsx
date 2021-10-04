@@ -7,6 +7,7 @@ import textStyles from '../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'
 import colors from '../styles/colorStyles'
 import useUserCategories from '../hooks/useUserCategories'
+import useCategories from '../hooks/useCategories'
 
 interface Props {
     onSubmit: () => void
@@ -42,7 +43,7 @@ const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
     const [answers, setAnswers] = useState<Array<string>>(['answers[0].ans', 'answers.[1].ans', 'answers[2].ans'])
     const [disabled, setDisabled] = useState<number>(1)
   
-    const { categories, loading } = useUserCategories()
+    const { categories, loading } = useCategories("ASC", "")
     
     const [correctField, correctMeta, correctHelpers] = useField('correct')
     const [privateField, privateMeta, privateHelpers] = useField('private')

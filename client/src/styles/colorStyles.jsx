@@ -1,6 +1,7 @@
 
 const colors = {
     background: '#021440',
+    lightBackground: 'rgba(255, 255, 255, .08)',
     lightText: '#FFFFFF',
     light: '#FFFFFF',
     darkText: '#021440',

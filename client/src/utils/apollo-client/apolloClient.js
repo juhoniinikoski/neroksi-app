@@ -3,23 +3,7 @@ import { mergeDeep, relayStylePagination } from "@apollo/client/utilities"
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:5000/graphql',
-});
-
-const updateQuery = (previousResult, { fetchMoreResult }) => {
-  const nextResult = {
-    category: {
-      ...fetchMoreResult.category,
-      questions: {
-        ...fetchMoreResult.category.questions,
-        edges: [
-          ...previousResult.category.questions.edges,
-          ...fetchMoreResult.category.questions.edges,
-        ],
-      },
-    },
-  };
-  return nextResult
-}
+})
 
 const createApolloClient = () => {
   return new ApolloClient({
@@ -29,10 +13,14 @@ const createApolloClient = () => {
       typePolicies: {
         Query: {
           fields: {
-            categories: relayStylePagination(["query"]),
-            questions: relayStylePagination()
+            categories: relayStylePagination()
           },
         },
+        Category: {
+          fields: {
+            questions: relayStylePagination()
+          }
+        }
       },
     })
   })

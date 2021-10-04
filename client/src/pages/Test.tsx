@@ -9,7 +9,7 @@ const Test = (  ) => {
 
   const { categories, loading: categoryLoad, fetchMore: categoryFetchmore } = useCategories("ASC", "")
   console.log(categories)
-  const { questions, loading, fetchMore } = useCategory("ASC", "", "pekka.diffis2")
+  const { questions, loading, fetchMore } = useCategory("pekka.diffis2")
   if (!loading) {
     console.log(questions)
   }

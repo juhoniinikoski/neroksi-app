@@ -1,6 +1,6 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
-import { Text, View, FlatList, Pressable } from 'react-native'
+import { Text, View, FlatList, Pressable, Button } from 'react-native'
 import useQuestions from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
@@ -15,29 +15,35 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const id = route.params.category.id
   const title = route.params.category.categoryTitle
 
-  const { questions, loading } = useQuestions("ASC", "", id)
+  const { questions, loading, fetchMore } = useQuestions(id)
   const headerHeight = useHeaderHeight()
 
-  const parsedQuestions = questions ? questions.map((q: any) => q.node) : undefined
+  const parsedQuestions = questions?.map((q: any) => q.node)
 
-  const renderItem = ( {item, index}: {item: any, index: number} ) => (
-    <Pressable onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index
-    })} style={styles.question}>
-      <Text style={textStyles.bodyText}>{item.questionTitle}</Text>
-    </Pressable>
-  )
+  const renderItem = ( {item, index}: {item: any, index: number} ) => {
+
+    const lastIndex = questions.length - 1
+
+    return (
+      <Pressable
+        onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index})}
+        style={index === 0 ? styles.firstQuestion : index === lastIndex ? styles.lastQuestion : styles.question}>
+        <Text style={textStyles.bodyText}>{item.questionTitle}</Text>
+      </Pressable>
+    )
+  }
 
   const listHeader = () => (
     <View>
-      <Text style={textStyles.smallTitle}>{'📎  ' + title}</Text>
+      <Text style={{...textStyles.smallTitle, marginBottom: 16}}>{'📎  ' + title}</Text>
     </View>
   )
 
   const separatorItem = () => (
-    <View style={styles.separator}/>
+    <View style={styles.bigSeparator}/>
   )
 
-  if (loading) {
+  if (loading && !parsedQuestions) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Loading...</Text>
@@ -58,6 +64,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
       />
+      <Button title='load more' onPress={fetchMore}></Button>
     </View>
   )
 }

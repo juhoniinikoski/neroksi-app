@@ -36,31 +36,60 @@ export const GET_CATEGORIES = gql`
 `
 
 export const GET_QUESTIONS = gql`
-  query questions(
-    $categoryId: String!
-    $after: String
-    $first: Int
-    ) {
-    questions(
-      categoryId: $categoryId
-      first: $first
-      after: $after
-      ) {
-      edges {
-        node {
-          id
-          questionTitle
+  query category($id: ID!, $after: String, $first: Int) {
+    category(id: $id) {
+      id
+      categoryTitle
+      questions(after: $after, first: $first) {
+        edges {
+          node {
+            id
+            questionTitle
+            createdAt
+            answers {
+              id
+              answer
+              correct
+            }
+          }
+          cursor
         }
-        cursor
-      }
-      pageInfo {
-        endCursor
-        startCursor
-        hasNextPage
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
+        }
       }
     }
   }
-`
+`;
+
+// export const GET_QUESTIONS = gql`
+//   query questions(
+//     $categoryId: String!
+//     $after: String
+//     $first: Int
+//     ) {
+//     questions(
+//       categoryId: $categoryId
+//       first: $first
+//       after: $after
+//       ) {
+//       edges {
+//         node {
+//           id
+//           questionTitle
+//         }
+//         cursor
+//       }
+//       pageInfo {
+//         endCursor
+//         startCursor
+//         hasNextPage
+//       }
+//     }
+//   }
+// `
 
 
 
