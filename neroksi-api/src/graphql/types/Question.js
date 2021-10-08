@@ -10,6 +10,7 @@ type Question {
   createdAt: DateTime!
   answers: [Answer]
   questionTitle: String
+  private: Boolean
 }
 `
 

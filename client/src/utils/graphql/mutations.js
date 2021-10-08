@@ -1,23 +1,23 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_QUESTION = gql`
-  mutation createQuestion($question: String!, $answers: JSON!, $correctAnswer: Int!, $private: Boolean!, $category: ID!) {
-    createQuestion(input: {
-      data: {
-        questionTitle: $question,
-        answers: $answers,
-        correctAnswer: $correctAnswer
+  mutation createQuestion(
+    $categoryId: String!
+    $questionTitle: String!
+    $answers: [String!]!
+    $correctId: Int!
+    $private: Boolean!
+    ) {
+    createQuestion(
+      question: {
+        categoryId: $categoryId
+        questionTitle: $questionTitle
+        answers: $answers
+        correctId: $correctId
         private: $private
-        category: $category
       }
-    }) {
-      question {
-        id
-        questionTitle
-        answers
-        private
-        correctAnswer
-      }
+    ) {
+      id
     }
   }
 `

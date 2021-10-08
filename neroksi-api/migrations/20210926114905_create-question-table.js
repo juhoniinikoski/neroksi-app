@@ -9,7 +9,7 @@ exports.up = function(knex) {
       .text('category_id')
       .references('categories.id')
       .onDelete('cascade');
-    table.integer('rating');
+    table.boolean('private')
     table.text('question_title');
     table.json('answers')
     table.timestamp('created_at');

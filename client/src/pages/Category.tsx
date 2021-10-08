@@ -1,6 +1,7 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
 import { Text, View, FlatList, Pressable, Button } from 'react-native'
+import QuestionBox from '../components/QuestionBox'
 import useQuestions from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
@@ -25,11 +26,14 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
     const lastIndex = questions.length - 1
 
     return (
-      <Pressable
-        onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index})}
-        style={index === 0 ? styles.firstQuestion : index === lastIndex ? styles.lastQuestion : styles.question}>
-        <Text style={textStyles.bodyText}>{item.questionTitle}</Text>
-      </Pressable>
+      <QuestionBox
+        fetchMore={fetchMore}
+        item={item}
+        navigation={navigation}
+        questions={questions}
+        index={index}
+        lastIndex={lastIndex}
+      />
     )
   }
 
@@ -42,6 +46,10 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const separatorItem = () => (
     <View style={styles.bigSeparator}/>
   )
+
+  const onEndReach = () => {
+      fetchMore()
+  }
 
   if (loading && !parsedQuestions) {
     return (
@@ -63,8 +71,9 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         ListHeaderComponent={listHeader}
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
+        onEndReachedThreshold={1}
+        onEndReached={onEndReach}
       />
-      <Button title='load more' onPress={fetchMore}></Button>
     </View>
   )
 }

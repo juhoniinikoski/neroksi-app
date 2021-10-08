@@ -17,7 +17,6 @@ interface Props {
 
 const initialValues = {
     question: '',
-    category: '',
     categoryID: '',
     answers: {
       0: {
@@ -40,10 +39,10 @@ const initialValues = {
 const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
 
     const [isEnabled, setIsEnabled] = useState<boolean>(false)
-    const [answers, setAnswers] = useState<Array<string>>(['answers[0].ans', 'answers.[1].ans', 'answers[2].ans'])
+    const [answers, setAnswers] = useState<Array<string>>(['answers[0]', 'answers[1]', 'answers[2]'])
     const [disabled, setDisabled] = useState<number>(1)
   
-    const { categories, loading } = useCategories("ASC", "")
+    const { categories, loading, fetchMore } = useCategories("ASC", "")
     
     const [correctField, correctMeta, correctHelpers] = useField('correct')
     const [privateField, privateMeta, privateHelpers] = useField('private')
@@ -52,18 +51,18 @@ const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
     const toggleSwitch = () => (setIsEnabled(previousState => !previousState), privateHelpers.setValue(isEnabled ? false : true))
   
     const removeAns = (values: any) => (
-      setAnswers(['answers[0].ans', 'answers.[1].ans']),
+      setAnswers(['answers[0]', 'answers[1]']),
       setDisabled(0),
       setFieldValue({
-        values: {...values, answers: {0: {...values.answers[0]}, 1: {...values.answers[1]}}}
+        values: {...values, answers: values.answers.pop()}
       })
     )
   
     const addAns = () => (
-      setAnswers(['answers[0].ans', 'answers.[1].ans', 'answers[2].ans']),
+      setAnswers(['answers[0]', 'answers[1]', 'answers[2]']),
       setDisabled(1),
       setFieldValue({
-        values: {...values, answers: {...values.answers, 2: initialValues.answers[2]}}
+        values: {...values, answers: values.answers.push('')}
       })
     )
   
@@ -75,6 +74,8 @@ const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
       setFieldValue('category', c.categoryTitle)
       categoryHelpers.setValue(c.id)
     }
+
+    const parsedCategories = categories?.map((c: any) => c.node)
   
     return (
       <View>
@@ -106,7 +107,7 @@ const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
         <Text style={{...textStyles.subTitle, marginTop: 36}}>Kategoria</Text>
         <FormikTextInput name='category' style={styles.searchBar} placeholder='Kategoria'/>
         <View style={{flexDirection: 'row', flexWrap: 'wrap'}} >
-          {categories.map((c: any, index: number) => <Pressable key={index} onPress={() => setCategory(c)}>
+          {parsedCategories.map((c: any, index: number) => <Pressable key={index} onPress={() => setCategory(c)}>
             <Text style={{...textStyles.bodyText, marginRight: 24, marginBottom: 24}}>{'📎  ' + c.categoryTitle}</Text>
           </Pressable>)}
         </View>

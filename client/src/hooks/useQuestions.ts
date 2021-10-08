@@ -5,7 +5,7 @@ const useQuestions = (id: string) => {
 
   const queryVariables = {
     id,
-    first: 3,
+    first: 12,
   }
 
   const handleFetchMore = () => {

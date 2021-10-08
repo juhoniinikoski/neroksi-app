@@ -51,6 +51,10 @@ const Home: React.FC<Props> = ( {navigation} ) => {
     )
   }
 
+  const onEndReach = () => {
+    fetchMore()
+  }
+
   return (
     <View style={{...styles.mainContainer}}>
       <FlatList
@@ -63,8 +67,9 @@ const Home: React.FC<Props> = ( {navigation} ) => {
         ListHeaderComponent={listHeader}
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
+        onEndReachedThreshold={1}
+        onEndReached={onEndReach}
       />
-      <Button title='load more' onPress={fetchMore}></Button>
     </View>
   )
 }

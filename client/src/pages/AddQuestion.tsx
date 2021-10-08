@@ -11,23 +11,7 @@ const initialValues = {
   question: '',
   category: '',
   categoryID: '',
-  answers: {
-    0: {
-      id: 0,
-      ans: '',
-      correct: false
-    },
-    1: {
-      id: 1,
-      ans: '',
-      correct: false
-    },
-    2: {
-      id: 2,
-      ans: '',
-      correct: false
-    }
-  },
+  answers: [],
   private: false,
   correct: ''
 }
@@ -45,15 +29,15 @@ const AddQuestion: React.FC<Props> = () => {
 
 	const onSubmit = async (values: any, resetForm: () => void) => {
 
-    values.answers[values.correct].correct = true
+    console.log(values)
 
     createQuestion({ variables: {
-      question: values.question,
-      answers: Object.values(values.answers),
-      correctAnswer: values.correct,
-      private: values.private,
-      category: values.categoryID
-    } })
+      categoryId: values.categoryID,
+      questionTitle: values.question,
+      answers: values.answers,
+      correctId: values.correct,
+      private: values.private
+    }})
 
     resetForm()
 	}
