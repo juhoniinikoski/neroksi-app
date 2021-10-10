@@ -1,6 +1,8 @@
+import { NavigationRouteContext } from '@react-navigation/core'
 import React from 'react'
 import { View, FlatList, Dimensions, Text } from 'react-native'
 import OptionBox from '../components/OptionBox'
+import useQuestions from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 
@@ -12,11 +14,16 @@ const Question: React.FC<Props> = ( {route} ) => {
   
   const height = Dimensions.get('screen').height
 
-  const questions: any = route.params.questions.map((q: any) => q.node)
+  const { questions, loading, fetchMore } = useQuestions(route.params.id, 12, route.params.lastIndex + 1)
+  const parsedQuestions = questions?.map((q: any) => q.node)
   
   const initialScrollID: number = route.params.initialScrollID
 
   const renderItem = ( {item}: {item: any} ) => <QuestionScreen item={item}/>
+
+  const onEndReach = () => {
+    fetchMore()
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -25,12 +32,15 @@ const Question: React.FC<Props> = ( {route} ) => {
         showsHorizontalScrollIndicator={false}
         pagingEnabled={true}
         initialScrollIndex={initialScrollID}
-        data={questions}
+        data={parsedQuestions}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         getItemLayout={(data: any, index: number) => (
           {length: height, offset: height * index, index}
-        )}/>
+        )}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={2}
+        />
     </View>
   )
 }

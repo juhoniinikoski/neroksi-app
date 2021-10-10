@@ -4,7 +4,7 @@ import React from 'react'
 const BottomNavBar = ({ state, descriptors, navigation }) => {
   
   return (
-    <View style={{ flexDirection: 'row',backgroundColor:'white',height:64, width: 200, borderRadius:50,justifyContent:"center",alignItems:"center", alignSelf: 'center', position: 'absolute', bottom: 44 }}>
+    <View style={{ flexDirection: 'row',backgroundColor:'white',height:64, width: 200, borderRadius:50,justifyContent:"center",alignItems:"center", alignSelf: 'center', position: 'absolute', bottom: 36 }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
         const label =

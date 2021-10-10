@@ -6,6 +6,7 @@ import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import useCategories from '../hooks/useCategories'
 import colors from '../styles/colorStyles'
+import { useAuth } from '../contexts/auth'
 
 interface Props {
   navigation: any
@@ -55,6 +56,12 @@ const Home: React.FC<Props> = ( {navigation} ) => {
     fetchMore()
   }
 
+  const auth = useAuth()
+
+  const signOut = () => {
+    auth.signOut();
+  }
+
   return (
     <View style={{...styles.mainContainer}}>
       <FlatList
@@ -70,6 +77,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
         onEndReachedThreshold={1}
         onEndReached={onEndReach}
       />
+      <Button onPress={signOut} title={'kirjaudu ulos'}></Button>
     </View>
   )
 }

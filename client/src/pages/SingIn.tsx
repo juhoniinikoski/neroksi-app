@@ -2,12 +2,22 @@ import React from 'react'
 import { View, Button, TextInput } from 'react-native'
 import { useAuthContext } from '../contexts/authContext'
 import styles from '../styles/styles'
+import {useAuth} from '../contexts/auth'
 
 function SignInScreen() {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+
+    const [loading, isLoading] = React.useState(false)
   
-    const { signIn } = useAuthContext()
+    // const { signIn } = useAuthContext()
+
+    const auth = useAuth()
+
+    const signIn = async () => {
+      isLoading(true);
+      await auth.signIn();
+    }
   
     return (
       <View style={{...styles.mainContainer, justifyContent: 'flex-start'}}>
@@ -25,7 +35,8 @@ function SignInScreen() {
           onChangeText={setPassword}
           secureTextEntry
         />
-        <Button title="Sign in" onPress={() => signIn({ username, password })} />
+        <Button title="Sign in" onPress={() => signIn()} />
+        {/* <Button title="Sign in" onPress={() => signIn({ username, password })} /> */}
       </View>
     )
 }

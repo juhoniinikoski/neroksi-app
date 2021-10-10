@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/client'
 import {GET_QUESTIONS} from '../utils/graphql/quories'
 
-const useQuestions = (id: string) => {
+const useQuestions = (id: string, regularFetch: number, initialFetch: number) => {
 
   const queryVariables = {
     id,
-    first: 12,
+    first: initialFetch,
   }
 
   const handleFetchMore = () => {
@@ -20,7 +20,8 @@ const useQuestions = (id: string) => {
       query: GET_QUESTIONS,
       variables: {
         after: data.category.questions.pageInfo.endCursor,
-        ...queryVariables,
+        first: regularFetch,
+        id: queryVariables.id
       },
     })
   }

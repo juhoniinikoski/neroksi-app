@@ -16,7 +16,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const id = route.params.category.id
   const title = route.params.category.categoryTitle
 
-  const { questions, loading, fetchMore } = useQuestions(id)
+  const { questions, loading, fetchMore } = useQuestions(id, 12, 12)
   const headerHeight = useHeaderHeight()
 
   const parsedQuestions = questions?.map((q: any) => q.node)
@@ -27,6 +27,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
 
     return (
       <QuestionBox
+        id={id}
         fetchMore={fetchMore}
         item={item}
         navigation={navigation}
@@ -43,12 +44,17 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
     </View>
   )
 
+  const listFooter = () => (
+    <View style={{height: 120}}>
+    </View>
+  )
+
   const separatorItem = () => (
     <View style={styles.bigSeparator}/>
   )
 
   const onEndReach = () => {
-      fetchMore()
+    fetchMore()
   }
 
   if (loading && !parsedQuestions) {
@@ -69,6 +75,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         renderItem={renderItem}
         ItemSeparatorComponent={separatorItem}
         ListHeaderComponent={listHeader}
+        ListFooterComponent={listFooter}
         keyExtractor={(item) => item.id}
         style={{alignSelf: 'stretch', marginTop: 4}}
         onEndReachedThreshold={1}

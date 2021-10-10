@@ -10,10 +10,11 @@ interface Props {
   index: number
   questions: any
   lastIndex: number
-  fetchMore: any
+  fetchMore: any,
+  id: string
 }
 
-const QuestionBox: React.FC<Props> = ({item, index, navigation, questions, lastIndex}) => {
+const QuestionBox: React.FC<Props> = ({item, index, navigation, questions, lastIndex, id}) => {
 
   const handleCommentPress = () => (
     console.log('painettu kommenttia ' + item.id)
@@ -25,7 +26,7 @@ const QuestionBox: React.FC<Props> = ({item, index, navigation, questions, lastI
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('Question', {questions: questions, initialScrollID: index})}
+      onPress={() => navigation.navigate('Question', {initialScrollID: index, initialQuestion: questions, id: id})}
       style={index === 0 ? styles.firstQuestion : index === lastIndex ? styles.lastQuestion : styles.question}>
       <Text style={{...textStyles.bodyText, paddingBottom: 16}}>{item.questionTitle}</Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
