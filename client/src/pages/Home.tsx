@@ -14,6 +14,12 @@ interface Props {
 
 const Home: React.FC<Props> = ( {navigation} ) => {
 
+  const auth = useAuth()
+
+  const signOut = () => {
+    auth.signOut();
+  }
+
   const { categories, loading, fetchMore } = useCategories("ASC", "")
   const headerHeight = useHeaderHeight()
 
@@ -54,12 +60,6 @@ const Home: React.FC<Props> = ( {navigation} ) => {
 
   const onEndReach = () => {
     fetchMore()
-  }
-
-  const auth = useAuth()
-
-  const signOut = () => {
-    auth.signOut();
   }
 
   return (

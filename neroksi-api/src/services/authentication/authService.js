@@ -1,4 +1,5 @@
 import { AuthenticationError } from 'apollo-server'
+import { isThisISOWeek } from 'date-fns'
 import { ACCESS_TOKEN_EXPIRATION_TIME } from '../../utils/config'
 import signJwt from './signJwt'
 import verifyJwt from './verifyJwt'
@@ -15,6 +16,8 @@ class AuthService {
     if (!this.accessToken) {
       return null
     }
+
+    console.log("authservice: " + this.accessToken)
 
     let tokenPayload
 

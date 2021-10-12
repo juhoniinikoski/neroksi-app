@@ -1,12 +1,13 @@
 import React, {createContext, useState, useContext, useEffect} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {AuthData, authService} from '../services//authentication/authService'
+import { apolloClient } from '../utils/apollo-client/apolloClient'
 
 type AuthContextData = {
-  authData?: AuthData;
-  loading: boolean;
-  signIn(): Promise<void>;
-  signOut(): void;
+  authData?: AuthData
+  loading: boolean
+  signIn(username: string, password: string): Promise<void>
+  signOut(): void
 }
 
 //Create the Auth Context with the data type specified
@@ -42,17 +43,19 @@ const AuthProvider: React.FC = ({children}) => {
     }
   }
 
-  const signIn = async () => {
+  const signIn = async (username: string, password: string) => {
     //call the service passing credential (email and password).
     //In a real App this data will be provided by the user from some InputText components.
     const authData = await authService.signIn(
-      'lucasgarcez@email.com',
-      '123456',
+      username,
+      password
     )
 
     //Set the data in the context, so the App can be notified
     //and send the user to the AuthStack
     setAuthData(authData)
+
+    apolloClient.resetStore()
 
     //Persist the data in the Async Storage
     //to be recovered in the next user session.
@@ -63,6 +66,8 @@ const AuthProvider: React.FC = ({children}) => {
     //Remove data from context, so the App can be notified
     //and send the user to the AuthStack
     setAuthData(undefined)
+
+    apolloClient.resetStore()
 
     //Remove the data from Async Storage
     //to NOT be recoverede in next session.

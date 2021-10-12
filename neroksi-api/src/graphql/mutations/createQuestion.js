@@ -43,7 +43,7 @@ export const resolvers = {
   Mutation: {
     createQuestion: async (obj, args, { authService }) => {
 
-      // const authorizedUser = await authService.getAuthorizedUserOrFail()
+      const authorizedUser = await authService.getAuthorizedUserOrFail()
 
       // implement authentication to client
 
@@ -64,7 +64,7 @@ export const resolvers = {
 
       return Question.query().insertAndFetch({
         id: uuid(),
-        // userId: authorizedUser.id,
+        userId: authorizedUser.id,
         categoryId,
         questionTitle: questionTitle,
         answers: JSON.stringify(answersObjects),

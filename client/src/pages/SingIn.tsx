@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Button, TextInput } from 'react-native'
-import { useAuthContext } from '../contexts/authContext'
 import styles from '../styles/styles'
 import {useAuth} from '../contexts/auth'
 
@@ -16,13 +15,14 @@ function SignInScreen() {
 
     const signIn = async () => {
       isLoading(true);
-      await auth.signIn();
+      await auth.signIn(username, password);
     }
   
     return (
       <View style={{...styles.mainContainer, justifyContent: 'flex-start'}}>
         <TextInput
           placeholder="Username"
+          autoCapitalize='none'
           value={username}
           // tyle={{height: 40, backgroundColor: 'white'}}
           style={styles.signInForm}
@@ -30,6 +30,7 @@ function SignInScreen() {
         />
         <TextInput
           placeholder="Password"
+          autoCapitalize='none'
           value={password}
           style={styles.signInForm}
           onChangeText={setPassword}

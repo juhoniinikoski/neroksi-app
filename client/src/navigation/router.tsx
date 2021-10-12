@@ -16,7 +16,8 @@ const theme = {
 
 export const Router = () => {
 
-  const {authData, loading} = useAuth();
+  const {authData, loading} = useAuth()
+  // console.log(authData)
 
   if (loading) {
     return (
