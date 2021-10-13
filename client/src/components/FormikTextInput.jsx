@@ -19,7 +19,7 @@ const FormikTextInput = ({ name, style, placeholder, ...props }) => {
         multiline={notMultiline.find(name => name) ? false : true}
         onChangeText={value => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
-        value={field.value}
+        value={field.value || ''}
         error={showError}
         secureTextEntry={name === 'password' ? true : false}
         {...props}

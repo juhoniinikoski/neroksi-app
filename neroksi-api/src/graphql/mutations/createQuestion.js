@@ -57,8 +57,6 @@ export const resolvers = {
         id: categoryId
       })
 
-
-
       const answersObjects = answers
         .map((a, index) => ({id: index, answer: a, correct: index === correctId ? true : false}))
 
