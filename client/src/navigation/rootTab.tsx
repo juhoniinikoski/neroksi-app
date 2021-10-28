@@ -11,7 +11,8 @@ const Tabs = createBottomTabNavigator()
 // check ways to make navigation simpler
 
 export const TabNav = () => (
-  <Tabs.Navigator tabBar={props => <BottomNavBar {...props}  />}>
+  // <Tabs.Navigator tabBar={props => <BottomNavBar {...props}  />}>
+  <Tabs.Navigator>
     <Tabs.Screen name="Home" component={HomeStack}/>
     <Tabs.Screen name="Profile" component={ProfileStack}/>
   </Tabs.Navigator>

@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../pages/Home'
 import Category from '../pages/Category'
+import { AddStack } from './addStack'
 
 const Stack = createStackNavigator()
 
