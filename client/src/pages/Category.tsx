@@ -53,7 +53,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   )
 
   const listFooter = () => (
-    <View style={{height: 120}}>
+    <View style={{height: 24}}>
     </View>
   )
 

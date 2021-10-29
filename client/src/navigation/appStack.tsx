@@ -18,8 +18,8 @@ const MainStack = () => {
 export const AppStack = () => {
   return (
     <Stack.Navigator initialRouteName='Main' mode='modal' screenOptions={{}}>
-      <Stack.Screen name='Main' component={MainStack} options={{headerShown: false}}/>
-      <Stack.Screen name='Add' component={AddStack} options={{headerShown: false, cardStyle: { backgroundColor: "transparent" }}}/>
+      <Stack.Screen name='Main' component={MainStack} options={{headerShown: false, title: ''}}/>
+      <Stack.Screen name='Add' component={AddStack} options={{headerShown: false, title: '', cardStyle: { backgroundColor: "transparent" }}}/>
     </Stack.Navigator>
   )
 }
