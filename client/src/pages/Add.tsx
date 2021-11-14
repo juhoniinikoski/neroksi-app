@@ -3,12 +3,8 @@ import { View, ScrollView, TextInput, Pressable, Text } from 'react-native'
 import { Formik } from 'formik'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
-import QuestionForm from '../components/QuestionForm'
-import { useMutation } from '@apollo/client'
-import { CREATE_QUESTION } from '../utils/graphql/mutations'
+import QuestionForm from '../components/add/QuestionForm'
 import { useNavigation } from '@react-navigation/native'
-import { useKeyboard } from '../hooks/useKeyboard'
-import colors, { themeColors } from '../styles/colorStyles'
 
 interface Props {
   onSubmit: () => void

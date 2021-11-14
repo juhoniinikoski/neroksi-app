@@ -10,7 +10,7 @@ const useQuestions = (id: string, regularFetch: number, initialFetch: number) =>
 
   const handleFetchMore = () => {
     const canFetchMore =
-      !loading && data && data.category.questions.pageInfo.hasNextPage
+      !loading && data && data.questions.pageInfo.hasNextPage
 
     if (!canFetchMore) {
       return
@@ -19,7 +19,7 @@ const useQuestions = (id: string, regularFetch: number, initialFetch: number) =>
     fetchMore({
       query: GET_QUESTIONS,
       variables: {
-        after: data.category.questions.pageInfo.endCursor,
+        after: data.questions.pageInfo.endCursor,
         first: regularFetch,
         id: queryVariables.id
       },
@@ -29,10 +29,10 @@ const useQuestions = (id: string, regularFetch: number, initialFetch: number) =>
   const { data, loading, fetchMore, ...result } = useQuery(GET_QUESTIONS, {
     variables: queryVariables,
     fetchPolicy: "cache-and-network",
-  });
+  })
 
   return {
-    questions: data ? data.category.questions.edges : undefined,
+    questions: data ? data.questions.edges : undefined,
     loading,
     fetchMore: handleFetchMore,
     ...result,

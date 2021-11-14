@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
-import colors from '../styles/colorStyles'
-import styles from '../styles/styles'
-import textStyles from '../styles/textStyles'
+import colors from '../../styles/colorStyles'
+import styles from '../../styles/styles'
+import textStyles from '../../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 interface Props {
   item: any
+  index: number
+  scroll: any
+  lastIndex: number
 }
 
-interface Scroll {
-  x: number
-  y: number
-  animated: boolean
-}
-
-const OptionBox: React.FC<Props> = ( {item} ) => {
+const OptionBox: React.FC<Props> = ( {item, index, scroll, lastIndex} ) => {
 
   const [selected, setSelected] = useState<number|null>(null)
   const [icon, setIcon] = useState<string|null>(null)
+
+  const navigation = useNavigation()
 
   // lisätään funktio, joka tyhjentää selectedin, kun kyseinen sivu poistuu näkyvistä
 
@@ -30,6 +30,13 @@ const OptionBox: React.FC<Props> = ( {item} ) => {
       setTimeout(() => setIcon(null), 1500)
     } else {
       setIcon('check')
+      setTimeout(() => {
+        if (index !== lastIndex) {
+          scroll(index + 1)
+        } else {
+          navigation.goBack()
+        }
+      }, 1000)
     }
   }
 

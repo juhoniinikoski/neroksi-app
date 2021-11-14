@@ -2,16 +2,15 @@ import { useQuery } from '@apollo/client'
 import {GET_CATEGORIES} from '../utils/graphql/quories'
 import parseSortBy from "../utils/parseSortBy"
 
-// const useCategories = (sortBy: any, filterText: string) => {
 const useCategories = (sortBy: string, filterText: string) => {
 
-  const sortVariables = parseSortBy(sortBy);
+  const sortVariables = parseSortBy(sortBy)
 
   const queryVariables = {
     ...sortVariables,
     searchKeyword: filterText,
-    first: 2,
-  };
+    first: 10,
+  }
 
   const handleFetchMore = () => {
     const canFetchMore =

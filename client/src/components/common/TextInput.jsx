@@ -1,6 +1,5 @@
 import React from 'react'
 import { TextInput as NativeTextInput } from 'react-native'
-import styles from '../styles/styles'
 
 const TextInput= ({ style, multiline, placeholder, ...props }) => {
 

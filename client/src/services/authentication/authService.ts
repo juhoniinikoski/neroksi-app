@@ -1,4 +1,3 @@
-import React from "react"
 import { apolloClient } from "../../utils/apollo-client/apolloClient"
 import { AUTHORIZE } from "../../utils/graphql/mutations"
 

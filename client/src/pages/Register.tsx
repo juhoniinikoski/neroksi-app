@@ -5,8 +5,7 @@ import { useAuthContext } from '../contexts/authContext'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
 import { Formik } from 'formik'
-import RegisterForm from '../components/RegisterForm'
-import { createUser } from '../services/authentication/user'
+import RegisterForm from '../components/register&signin/RegisterForm'
 
 const Register: React.FC<any> = () => {
 
@@ -19,7 +18,6 @@ const Register: React.FC<any> = () => {
   const headerHeight = useHeaderHeight()
 
   const onSubmit = async (values: any, resetForm: () => void) => {
-    createUser(values)
     resetForm()
 	}
 

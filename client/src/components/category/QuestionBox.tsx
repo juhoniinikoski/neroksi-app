@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pressable, Text, View } from 'react-native'
-import styles from '../styles/styles'
-import textStyles from '../styles/textStyles'
+import styles from '../../styles/styles'
+import textStyles from '../../styles/textStyles'
 import { Entypo, FontAwesome5 } from '@expo/vector-icons'
 
 interface Props {
@@ -26,7 +26,7 @@ const QuestionBox: React.FC<Props> = ({item, index, navigation, questions, lastI
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('Question', {initialScrollID: index, initialQuestion: questions, id: id})}
+      onPress={() => navigation.navigate('Question', {initialScrollID: index, initialQuestion: questions, id: id, lastIndex})}
       style={index === 0 ? styles.firstQuestion : index === lastIndex ? styles.lastQuestion : styles.question}>
       <Text style={{...textStyles.bodyText, paddingBottom: 16}}>{item.questionTitle}</Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>

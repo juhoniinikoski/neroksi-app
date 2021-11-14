@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { View, Pressable, Text, Switch, Button, TextInput, FlatList } from 'react-native'
 import { useField } from 'formik'
-import FormikTextInput from '../components/FormikTextInput'
-import styles from '../styles/styles'
-import textStyles from '../styles/textStyles'
+import styles from '../../styles/styles'
+import textStyles from '../../styles/textStyles'
 import { Entypo } from '@expo/vector-icons'
-import colors, { themeColors } from '../styles/colorStyles'
-import useUserCategories from '../hooks/useUserCategories'
-import useCategories from '../hooks/useCategories'
+import colors, { themeColors } from '../../styles/colorStyles'
+import useUserCategories from '../../hooks/useUserCategories'
+import useCategories from '../../hooks/useCategories'
 import { useNavigation } from '@react-navigation/native'
 
 interface Props {

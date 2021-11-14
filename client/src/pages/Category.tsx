@@ -1,13 +1,10 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
 import { Text, View, FlatList, Button, TouchableWithoutFeedback, Dimensions } from 'react-native'
-import QuestionBox from '../components/QuestionBox'
+import QuestionBox from '../components/category/QuestionBox'
 import useQuestions from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
-import AddQuestion from './AddQuestion'
-import { BlurView } from 'expo-blur'
-import colors from '../styles/colorStyles'
 
 
 interface Props {
@@ -24,8 +21,8 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const headerHeight = useHeaderHeight()
 
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      refetch()
+    const unsubscribe = navigation.addListener('focus', async () => {
+      await refetch()
     })
     return unsubscribe
   }, [navigation])

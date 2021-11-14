@@ -1,11 +1,9 @@
 import React from 'react'
 import { View, Text, Pressable, FlatList, TextInput, Button } from 'react-native'
 import { useHeaderHeight } from '@react-navigation/stack'
-import useUserCategories from '../hooks/useUserCategories'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import useCategories from '../hooks/useCategories'
-import colors from '../styles/colorStyles'
 import { useAuth } from '../contexts/auth'
 
 interface Props {
@@ -20,10 +18,17 @@ const Home: React.FC<Props> = ( {navigation} ) => {
     auth.signOut();
   }
 
-  const { categories, loading, fetchMore } = useCategories("ASC", "")
+  const { categories, loading, fetchMore, refetch } = useCategories("ASC", "")
   const headerHeight = useHeaderHeight()
 
   const parsedCategories = categories?.map((c: any) => c.node)
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      await refetch()
+    })
+    return unsubscribe
+  }, [navigation])
 
   const renderItem = ( {item, index}: {item: any, index: number} ) => {
 

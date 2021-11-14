@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native'
 import { Formik } from 'formik'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
-import QuestionForm from '../components/QuestionForm'
+import QuestionForm from '../components/add/QuestionForm'
 import { useMutation } from '@apollo/client'
 import { CREATE_QUESTION } from '../utils/graphql/mutations'
 

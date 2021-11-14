@@ -3,13 +3,10 @@ import { View, ScrollView, TextInput, Pressable, Text } from 'react-native'
 import { Formik } from 'formik'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
-import QuestionForm from '../components/QuestionForm'
 import { useMutation } from '@apollo/client'
 import { CREATE_QUESTION } from '../utils/graphql/mutations'
 import { useNavigation } from '@react-navigation/native'
-import { useKeyboard } from '../hooks/useKeyboard'
-import colors, { themeColors } from '../styles/colorStyles'
-import ConfirmForm from '../components/ConfirmForm'
+import ConfirmForm from '../components/add/ConfirmForm'
 
 interface Props {
   route: any

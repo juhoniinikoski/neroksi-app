@@ -36,33 +36,31 @@ export const GET_CATEGORIES = gql`
 `
 
 export const GET_QUESTIONS = gql`
-  query category($id: ID!, $after: String, $first: Int) {
-    category(id: $id) {
-      id
-      categoryTitle
-      questions(after: $after, first: $first) {
-        edges {
-          node {
-            id
-            questionTitle
-            createdAt
-            answers {
-              id
-              answer
-              correct
-            }
+  query questions($id: String!, $after: String, $first: Int) {
+    questions(categoryId: $id, after: $after, first: $first) {
+      edges {
+        node {
+          category {
+            categoryTitle
           }
-          cursor
+          id
+          questionTitle
+          createdAt
+          answers {
+            id
+            answer
+            correct
+          }
         }
-        pageInfo {
-          endCursor
-          startCursor
-          hasNextPage
-        }
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }
-`;
+`
 
 // export const GET_QUESTIONS = gql`
 //   query questions(
