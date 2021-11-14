@@ -19,9 +19,19 @@ const textStyles = StyleSheet.create({
     },
     bodyText: {
       color: colors.lightText,
-      fontSize: 16,
+      fontSize: 17,
       fontWeight: 'normal'
     },
+    questionText: {
+      color: colors.lightText,
+      fontSize: 20,
+      fontWeight: 'normal'
+    },
+    placeHolder: {
+      color: '#999999',
+      fontSize: 17,
+      fontWeight: 'normal'
+    }
 })
 
 export default textStyles

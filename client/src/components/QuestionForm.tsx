@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { View, Pressable, Text, Switch } from 'react-native'
+import { View, Pressable, Text, Switch, Button, TextInput, FlatList } from 'react-native'
 import { useField } from 'formik'
 import FormikTextInput from '../components/FormikTextInput'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'
-import colors from '../styles/colorStyles'
+import colors, { themeColors } from '../styles/colorStyles'
 import useUserCategories from '../hooks/useUserCategories'
 import useCategories from '../hooks/useCategories'
+import { useNavigation } from '@react-navigation/native'
 
 interface Props {
     onSubmit: () => void
@@ -15,109 +16,116 @@ interface Props {
     values: any
 }
 
-const initialValues = {
-    question: '',
-    categoryID: '',
-    answers: {
-      0: {
-        ans: '',
-        correct: false
-      },
-      1: {
-        ans: '',
-        correct: false
-      },
-      2: {
-        ans: '',
-        correct: false
-      }
-    },
-    private: false,
-    correct: ''
-}
-
 const QuestionForm: React.FC<Props> = ({ onSubmit, values, setFieldValue }) => {
 
-    const [isEnabled, setIsEnabled] = useState<boolean>(false)
-    const [answers, setAnswers] = useState<Array<string>>(['answers[0]', 'answers[1]', 'answers[2]'])
-    const [disabled, setDisabled] = useState<number>(1)
+    const [answers, setAnswers] = useState<Array<string>>(['answers[0]', 'answers[1]'])
+    const [disabled, setDisabled] = useState<boolean>(true)
+    const [selectCategory, setSelectCategory] = useState<boolean>(false)
   
     const { categories, loading, fetchMore } = useCategories("ASC", "")
-    
-    const [correctField, correctMeta, correctHelpers] = useField('correct')
-    const [privateField, privateMeta, privateHelpers] = useField('private')
+    const parsedCategories = categories?.map((c: any) => c.node)
+
     const [categoryField, categoryMeta, categoryHelpers] = useField('categoryID')
-  
-    const toggleSwitch = () => (setIsEnabled(previousState => !previousState), privateHelpers.setValue(isEnabled ? false : true))
-  
-    const removeAns = (values: any) => (
-      setAnswers(['answers[0]', 'answers[1]']),
-      setDisabled(0),
-      setFieldValue({
-        values: {...values, answers: values.answers.pop()}
+
+    const isntEmpty = (value: string) => value != ''
+
+    const navigation = useNavigation()
+
+    React.useEffect(() => {
+      setDisabled(!(values.answers.every(isntEmpty) && values.question != '' && !selectCategory))
+    }, [values, selectCategory])
+
+    React.useLayoutEffect(() => {
+      navigation.setOptions({
+        headerRight: () => (
+          <Pressable onPress={onSubmit} disabled={disabled}>
+            <Text style={{fontSize: 17, fontWeight: 'bold', color: disabled ? colors.disabled : 'white', marginRight: 16}}>
+              Seuraava
+            </Text>
+          </Pressable>
+        ),
       })
-    )
-  
+    }, [navigation, disabled])
+
     const addAns = () => (
       setAnswers(['answers[0]', 'answers[1]', 'answers[2]']),
-      setDisabled(1),
       setFieldValue({
         values: {...values, answers: values.answers.push('')}
       })
     )
-  
-    const chooseCorrect = (index: number) => {
-      correctHelpers.setValue(values.correct === index ? '' : index)
-    }
-  
+
+    const removeAns = () => (
+      setAnswers(['answers[0]', 'answers[1]']),
+      setFieldValue({
+        values: {...values, answers: values.answers.pop()}
+      })
+    )
+
     const setCategory = (c: {categoryTitle: string, id: number}) => {
       setFieldValue('category', c.categoryTitle)
       categoryHelpers.setValue(c.id)
     }
 
-    const parsedCategories = categories?.map((c: any) => c.node)
+    const RenderItem = ( {category, index}: {category: any, index: number} ) => {
+
+      const lastIndex = categories.length - 1
+  
+      return (
+        <View>
+          <Pressable
+            onPress={() => setCategory(category)}
+            style={index === 0 ? {...styles.firstCategory} : index === lastIndex ? styles.lastCategory : styles.category}>
+            <Text style={textStyles.bodyText}>{'📎  ' + category.categoryTitle}</Text>
+          </Pressable>
+          {index !== lastIndex ? <SeparatorItem></SeparatorItem> : <></>}
+        </View>
+      )
+    }
+
+    const SeparatorItem = () => (
+      <View style={{...styles.separator, alignSelf: 'stretch', justifyContent: 'flex-start'}}/>
+    )
   
     return (
       <View>
-        <Text style={textStyles.title}>Lisää tehtävä</Text>
-        <Text style={{...textStyles.subTitle, marginTop: 36}}>Tehtävä</Text>
-        <FormikTextInput name='question' style={styles.questionForm} placeholder='Kirjoita kysymys tähän'/>
-        <View style={{...styles.toggle, marginBottom: 16}}>
-          <Text style={textStyles.subTitle}>Vaihtoehdot</Text>
-          <View style={styles.addAns}>
-            <Pressable onPress={() => removeAns(values)} disabled={answers.length === 2 ? true : false}>
-              <FontAwesome5 name='minus' size={20} color={disabled === 1 ? 'white' : colors.disabled}/>
-            </Pressable>
-            <Pressable onPress={addAns} disabled={answers.length === 3 ? true : false}>
-                <FontAwesome5 name='plus' size={20} color={disabled === 0 ? 'white' : colors.disabled}/>
-            </Pressable>
+        <Pressable style={styles.selectCategory} onPress={() => setSelectCategory(!selectCategory)}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text style={{fontSize: 12, color: 'white', marginRight: 4}}>📎</Text>
+            <Text style={{fontSize: 16, color: 'white'}}>{values.category}</Text>
+            {selectCategory ? 
+              <FontAwesome5 name="caret-up" size={20} style={{marginLeft: 8}} color='white' /> : 
+              <FontAwesome5 name="caret-down" size={20} style={{marginLeft: 8}} color='white' />}
           </View>
-        </View>
-        {answers.map((a, index) => <FormikTextInput key={index} name={a} style={styles.answerForm} placeholder={`Anna ${index + 1}. ratkaisu tähän`}/>)}
-        <Text style={{...textStyles.subTitle, marginTop: 28}}>Oikea ratkaisu</Text>
-        <View style={{flexDirection: 'row', marginTop: 24}}>
-        {answers.map((a, index) => 
-          <View key={index} style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={{...textStyles.bodyText, paddingRight: 10}}>{index + 1}.</Text>
-            <Pressable onPress={() => chooseCorrect(index)} style={{...styles.correctAns, justifyContent: 'center', padding: 5}}>
-              <View style={values.correct === index ? {backgroundColor: colors.background, height: '100%', borderRadius: 50} : null}></View>
-            </Pressable>
-          </View>)}
-        </View>
-        <Text style={{...textStyles.subTitle, marginTop: 36}}>Kategoria</Text>
-        <FormikTextInput name='category' style={styles.searchBar} placeholder='Kategoria'/>
-        <View style={{flexDirection: 'row', flexWrap: 'wrap'}} >
-          {parsedCategories.map((c: any, index: number) => <Pressable key={index} onPress={() => setCategory(c)}>
-            <Text style={{...textStyles.bodyText, marginRight: 24, marginBottom: 24}}>{'📎  ' + c.categoryTitle}</Text>
-          </Pressable>)}
-        </View>
-        <View style={{...styles.toggle, marginTop: 12}}>
-          <Text style={{...textStyles.subTitle}}>Yksityinen</Text>
-          <Switch onValueChange={toggleSwitch} value={isEnabled}></Switch>
-        </View>
-        <Pressable onPress={onSubmit} style={styles.submitButton}>
-              <Text style={textStyles.subTitle}>Tallenna</Text>
         </Pressable>
+        {selectCategory ? 
+
+        // CATEGORY SELECTION FORM
+
+        <View style={{marginTop: 24}}>
+          <TextInput autoCapitalize='none' autoCorrect={false} placeholder='Hae kategoriaa...' style={{...styles.searchBar}}></TextInput>
+          <Text style={{...textStyles.subTitle, marginBottom: 24}}>Lempparit</Text>
+          {parsedCategories.map((c: any, index: number) => <RenderItem key={c.id} category={c} index={index}/>)}
+        </View> : 
+        
+        // MAIN FORM
+
+        <View>
+          <FormikTextInput name='question' style={styles.questionForm} color='#999999' placeholder='Kirjoita kysymys tähän...'/>
+          {answers.map((a, index) => 
+          <View key={index}>
+            {index == 2 ? <Pressable onPress={removeAns} style={{position: 'absolute', top: 16, right: 16, height: 15, width: 15, zIndex: 1000}}>
+              <FontAwesome5 name="times" size={18} color={colors.disabled} />
+            </Pressable> : <></>}
+            <FormikTextInput name={a} style={styles.answerForm} color={colors.disabled} placeholder={`Anna ${index + 1}. ratkaisuvaihtoehto tähän`}/>
+          </View>
+          )}
+          {answers.length === 2 ?
+            <Pressable onPress={addAns} style={{...styles.answerForm, backgroundColor: themeColors.primaryBackground, flexDirection: 'row'}}>
+              <FontAwesome5 name="plus" size={14} color='white' />
+              <Text style={{fontSize: 16, marginLeft: 8, color: 'white'}}>lisää ratkaisu</Text>
+            </Pressable> : <></>}
+        </View>
+        }
       </View>
     )
 }

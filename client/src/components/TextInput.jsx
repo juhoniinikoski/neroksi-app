@@ -4,7 +4,13 @@ import styles from '../styles/styles'
 
 const TextInput= ({ style, multiline, placeholder, ...props }) => {
 
-  return <NativeTextInput autoCorrect={false} autoCapitalize='none' style={style} placeholder={placeholder} {...props} multiline={multiline} />
+  return <NativeTextInput 
+    autoCorrect={false}
+    autoCapitalize='none'
+    style={style}
+    placeholder={placeholder}
+    {...props}
+    multiline={multiline} />
   
 }
 

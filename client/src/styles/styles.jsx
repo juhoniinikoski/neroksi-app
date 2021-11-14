@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import colors, {themeColors} from './colorStyles'
+import textStyles from './textStyles'
 
 const styles = StyleSheet.create({
 
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     searchBar: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
         fontSize: 16,
         flex: 1,
         height: 44,
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 16,
         paddingHorizontal: 16,
-        backgroundColor: themeColors.primaryLight
+        backgroundColor: themeColors.primaryLight,
     },
     firstCategory: {
         borderTopLeftRadius: 20,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 24,
         paddingBottom: 16,
-        backgroundColor: themeColors.primaryLight
+        backgroundColor: themeColors.primaryLight,
     },
     lastCategory: {
         borderBottomLeftRadius: 20,
@@ -114,29 +115,25 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         shadowOpacity: .4
     },
-    questionForm: {
-        paddingTop: 20,
-        fontSize: 16,
-        paddingBottom: 20,
-        paddingHorizontal: 20,
-        height: 180,
-        borderRadius: 16,
-        backgroundColor: colors.light,
-        marginBottom: 36,
-        marginTop: 24
-    },
 
     // ADD QUESTION
 
+    questionForm: {
+        paddingTop: 36,
+        paddingBottom: 36,
+        fontSize: textStyles.questionText.fontSize,
+        color: 'white',
+    },
     answerForm: {
-        paddingTop: 20,
-        fontSize: 16,
-        paddingBottom: 20,
-        paddingHorizontal: 20,
-        height: 95,
+        paddingTop: 24,
+        paddingBottom: 24,
+        paddingHorizontal: 36,
         borderRadius: 16,
         backgroundColor: colors.light,
-        marginVertical: 8
+        marginVertical: 8,
+        fontSize: 16,
+        justifyContent: 'center',
+        alignItems: 'flex-start'
     },
     submitButton: {
         marginTop: 48,
@@ -154,10 +151,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     addQuestionContainer: {
-        paddingHorizontal: 24,
-        paddingTop: 24,
+        paddingHorizontal: 16,
         flex: 1,
-        alignItems: 'stretch',
         justifyContent: 'center',
         backgroundColor: themeColors.secondaryBackground
     },
@@ -167,18 +162,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    correctAns: {
-        height: 25,
-        width: 25,
-        backgroundColor: colors.light,
-        marginRight: 36,
-        borderRadius: 50
+    selectCategory: {
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 10,
+        alignSelf: 'flex-start',
+        paddingHorizontal: 16,
+        paddingVertical: 8
     },
 
     // SIGN IN & REGISTER
 
     signInForm: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
         fontSize: 16,
         height: 44,
         backgroundColor: colors.light,
@@ -189,7 +185,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         fontSize: 16,
         paddingBottom: 20,
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
         borderRadius: 16,
         backgroundColor: colors.light,
         marginVertical: 8

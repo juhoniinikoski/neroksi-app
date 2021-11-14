@@ -18,14 +18,17 @@ interface Props {
 const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const id = route.params.category.id
-  const title = route.params.category.categoryTitle
+  const category = route.params.category
 
-  const width = Dimensions.get('screen').width
-
-  const [addScreen, showAddScreen] = React.useState(false)
-
-  const { questions, loading, fetchMore } = useQuestions(id, 12, 12)
+  const { questions, loading, fetchMore, refetch } = useQuestions(id, 12, 12)
   const headerHeight = useHeaderHeight()
+
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      refetch()
+    })
+    return unsubscribe
+  }, [navigation])
 
   const parsedQuestions = questions?.map((q: any) => q.node)
 
@@ -48,7 +51,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
 
   const listHeader = () => (
     <View>
-      <Text style={{...textStyles.smallTitle, marginBottom: 16}}>{'📎  ' + title}</Text>
+      <Text style={{...textStyles.smallTitle, marginBottom: 16}}>{'📎  ' + category.categoryTitle}</Text>
     </View>
   )
 
@@ -89,7 +92,14 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         onEndReachedThreshold={1}
         onEndReached={onEndReach}
       />
-      <Button title='lisää kysymys' onPress={() => navigation.navigate('Add')}></Button>
+      <Button title='lisää kysymys' 
+        onPress={() => navigation.navigate('Add', {
+          screen: 'Add',
+          params: {
+            screen: 'AddQuestions',
+            params: {initialCategory: category}
+          }})}>
+        </Button>
     </View>
   )
 }

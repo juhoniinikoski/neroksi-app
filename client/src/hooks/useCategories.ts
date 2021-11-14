@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import {GET_CATEGORIES} from '../utils/graphql/quories'
-import parseSortBy from "../utils/parseSortBy";
+import parseSortBy from "../utils/parseSortBy"
 
 // const useCategories = (sortBy: any, filterText: string) => {
 const useCategories = (sortBy: string, filterText: string) => {

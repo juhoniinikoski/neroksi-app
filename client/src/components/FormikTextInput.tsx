@@ -3,8 +3,16 @@ import { useField } from 'formik'
 import { Text } from 'react-native'
 import TextInput from './TextInput'
 import styles from '../styles/styles'
+import textStyles from '../styles/textStyles'
 
-const FormikTextInput = ({ name, style, placeholder, ...props }) => {
+interface Props {
+  name: string
+  style: any
+  placeholder: string
+  color: string
+}
+
+const FormikTextInput: React.FC<Props> = ({ name, style, placeholder, color, ...props }) => {
 
   const [field, meta, helpers] = useField(name)
   const showError = meta.touched && meta.error
@@ -14,17 +22,19 @@ const FormikTextInput = ({ name, style, placeholder, ...props }) => {
   return (
     <>
       <TextInput
+        placeholderTextColor={color}
         placeholder={placeholder}
         style={style}
-        multiline={notMultiline.find(name => name) ? false : true}
-        onChangeText={value => helpers.setValue(value)}
+        multiline={notMultiline.find(n => n == name) ? false : true}
+        onChangeText={(value: any) => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value || ''}
         error={showError}
         secureTextEntry={name === 'password' ? true : false}
+        autoFocus={name === 'question' ? true : false}
         {...props}
       />
-      {showError && <Text style={styles.errorText}>{meta.error}</Text>}
+      {showError && <Text style={textStyles.bodyText}>{meta.error}</Text>}
     </>
   )
 }

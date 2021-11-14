@@ -6,17 +6,9 @@ import styles from '../styles/styles'
 import QuestionForm from '../components/QuestionForm'
 import { useMutation } from '@apollo/client'
 import { CREATE_QUESTION } from '../utils/graphql/mutations'
+import { useNavigation } from '@react-navigation/native'
 import { useKeyboard } from '../hooks/useKeyboard'
 import colors, { themeColors } from '../styles/colorStyles'
-
-const initialValues = {
-  question: '',
-  category: '',
-  categoryID: '',
-  answers: [],
-  private: false,
-  correct: ''
-}
 
 interface Props {
   onSubmit: () => void
@@ -25,36 +17,43 @@ interface Props {
   values: any
 }
 
-const Add: React.FC = () => {
+interface Props {
+  route: any
+}
+
+const Add: React.FC<Props> = ({route}) => {
+
+  const navigation = useNavigation()
+
+  const initialCategory = route.params.initialCategory
+
+  const initialValues = {
+    question: '',
+    category: initialCategory.categoryTitle,
+    categoryID: initialCategory.id,
+    answers: ['', ''],
+    private: false,
+    correct: ''
+  }
 
 	const headerHeight = useHeaderHeight()
 
 	const onSubmit = async (values: any, resetForm: () => void) => {
 
-    console.log(values)
-
-    createQuestion({ variables: {
-      categoryId: values.categoryID,
-      questionTitle: values.question,
-      answers: values.answers,
-      correctId: values.correct,
-      private: values.private
-    }})
-
-    resetForm()
+    navigation.navigate('ConfirmAdd', {initialValues: values, category: initialCategory})
+    
 	}
-
-  const [ createQuestion ] = useMutation(CREATE_QUESTION, {
-    onError: (error) => {
-      console.log(error)
-    }
-  })
 
 	return (
 		<View style={{...styles.addQuestionContainer, paddingTop: headerHeight}}>
-      <ScrollView>
-        <TextInput autoFocus={true} style={{height: 200, backgroundColor: themeColors.primaryBackground}}></TextInput>
-      </ScrollView>
+      <ScrollView
+        contentContainerStyle={{marginTop: 24}}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+				<Formik initialValues={initialValues} onSubmit={(values, { resetForm }) => {onSubmit(values, resetForm)}}>
+					{({ handleSubmit, resetForm, values, setFieldValue }) => <QuestionForm onSubmit={handleSubmit} values={values} setFieldValue={setFieldValue}/>}
+				</Formik>
+			</ScrollView>
 		</View>
 	)
 }
