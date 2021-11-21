@@ -1,8 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import colors from '../styles/colorStyles'
-import AddQuestion from '../pages/AddQuestion'
+import Profile from '../pages/Profile'
 
 const Stack = createStackNavigator()
 
@@ -10,7 +8,7 @@ const Stack = createStackNavigator()
 export const ProfileStack = () => {
   return (
     <Stack.Navigator initialRouteName='Profile'>
-      <Stack.Screen name='Add' component={AddQuestion} options={{headerTransparent: true, title: ''}}/>
+      <Stack.Screen name='Profile' component={Profile} options={{headerTransparent: true, title: ''}}/>
     </Stack.Navigator>
   )
 }

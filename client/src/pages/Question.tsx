@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, FlatList, Dimensions, Text, Button } from 'react-native'
 import OptionBox from '../components/question/OptionBox'
-import useQuestions from '../hooks/useQuestions'
+import {useCategoryQuestions as useQuestions} from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 
@@ -27,7 +27,6 @@ const Question: React.FC<Props> = ( {route} ) => {
   }
 
   const handleScroll = (index: number) => {
-    console.log('painettu')
     flatlistRef.current.scrollToIndex({ animated: true, index: index })
   }
 

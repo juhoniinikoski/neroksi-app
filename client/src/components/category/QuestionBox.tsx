@@ -2,7 +2,7 @@ import React from 'react'
 import { Pressable, Text, View } from 'react-native'
 import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
-import { Entypo, FontAwesome5 } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 interface Props {
   navigation: any
@@ -34,7 +34,7 @@ const QuestionBox: React.FC<Props> = ({item, index, navigation, questions, lastI
           <FontAwesome5 name="comment" size={22} color="white" />
         </Pressable>
         <Pressable onPress={handleDotPress} >
-          <Entypo name="dots-two-vertical" size={24} color="white" />
+          <FontAwesome5 name="ellipsis-v" size={20} color="white" />
         </Pressable>
       </View>
     </Pressable>

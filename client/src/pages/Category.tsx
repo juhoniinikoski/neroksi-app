@@ -1,8 +1,9 @@
 import { useHeaderHeight } from '@react-navigation/stack'
 import React from 'react'
-import { Text, View, FlatList, Button, TouchableWithoutFeedback, Dimensions } from 'react-native'
+import { Text, View, FlatList, Button } from 'react-native'
 import QuestionBox from '../components/category/QuestionBox'
-import useQuestions from '../hooks/useQuestions'
+import Selection from '../components/common/Selection'
+import {useCategoryQuestions as useQuestions} from '../hooks/useQuestions'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 
@@ -21,8 +22,8 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   const headerHeight = useHeaderHeight()
 
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      await refetch()
+    const unsubscribe = navigation.addListener('focus', () => {
+      refetch()
     })
     return unsubscribe
   }, [navigation])
@@ -46,11 +47,19 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
     )
   }
 
-  const listHeader = () => (
-    <View>
-      <Text style={{...textStyles.smallTitle, marginBottom: 16}}>{'📎  ' + category.categoryTitle}</Text>
-    </View>
-  )
+  const listHeader = () => {
+
+    const handlePress = (index: number) => {
+      console.log('pressed ' + index)
+    }
+
+    return (
+      <View>
+        <Text style={{...textStyles.smallTitle}}>{'📎  ' + category.categoryTitle}</Text>
+        <Selection handlePress={handlePress} names={['Viimeisimmät', 'Suosituimmat']}/> 
+      </View>
+    )
+  }
 
   const listFooter = () => (
     <View style={{height: 24}}>
@@ -58,7 +67,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
   )
 
   const separatorItem = () => (
-    <View style={styles.bigSeparator}/>
+    <View style={{...styles.separator, marginLeft: 0}}/>
   )
 
   const onEndReach = () => {
@@ -85,7 +94,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         ListHeaderComponent={listHeader}
         ListFooterComponent={listFooter}
         keyExtractor={(item) => item.id}
-        style={{alignSelf: 'stretch', marginTop: 4}}
+        style={{alignSelf: 'stretch', marginTop: 16}}
         onEndReachedThreshold={1}
         onEndReached={onEndReach}
       />

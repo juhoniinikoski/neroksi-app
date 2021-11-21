@@ -5,6 +5,7 @@ import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import useCategories from '../hooks/useCategories'
 import { useAuth } from '../contexts/auth'
+import SearchCategories from '../components/home/SearchCategories'
 
 interface Props {
   navigation: any
@@ -20,12 +21,13 @@ const Home: React.FC<Props> = ( {navigation} ) => {
 
   const { categories, loading, fetchMore, refetch } = useCategories("ASC", "")
   const headerHeight = useHeaderHeight()
+  const [searchActive, setSearchActive] = React.useState(false)
 
   const parsedCategories = categories?.map((c: any) => c.node)
 
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      await refetch()
+    const unsubscribe = navigation.addListener('focus', () => {
+      refetch()
     })
     return unsubscribe
   }, [navigation])
@@ -46,7 +48,7 @@ const Home: React.FC<Props> = ( {navigation} ) => {
   const listHeader = () => (
     <View>
       <Text style={textStyles.title}>Selaa</Text>
-      <TextInput autoCapitalize='none' autoCorrect={false} placeholder='Etsi lisää...' style={styles.searchBar}></TextInput>
+      <SearchCategories setSearch={setSearchActive}/>
       <Text style={{...textStyles.subTitle, marginBottom: 16}}>Lempparit</Text>
     </View>
   )

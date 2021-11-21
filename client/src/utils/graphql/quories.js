@@ -13,10 +13,12 @@ export const GET_CATEGORIES = gql`
   query categories(
     $after: String
     $first: Int
+    $searchKeyword: String
   ) {
     categories(
       after: $after
       first: $first
+      searchKeyword: $searchKeyword
     ) {
       edges {
         node {
@@ -36,8 +38,8 @@ export const GET_CATEGORIES = gql`
 `
 
 export const GET_QUESTIONS = gql`
-  query questions($id: String!, $after: String, $first: Int) {
-    questions(categoryId: $id, after: $after, first: $first) {
+  query questions($categoryId: String, $collectionId: String, $after: String, $first: Int) {
+    questions(collectionId: $collectionId, categoryId: $categoryId, after: $after, first: $first) {
       edges {
         node {
           category {

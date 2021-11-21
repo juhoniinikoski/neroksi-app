@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 import { TabNav } from './rootTab'
 import Question from '../pages/Question'
 import { AddStack } from './addStack'
+import BackButton from '../components/common/BackButton'
 
 const Stack = createStackNavigator()
 
@@ -10,7 +11,14 @@ const MainStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name='Home' component={TabNav} options={{headerShown: false}}/>
-      <Stack.Screen name='Question' component={Question} options={{headerShown: false}}/>
+      <Stack.Screen name='Question'
+        component={Question}
+        options={({ navigation, route }) => ({
+          headerTransparent: true,
+          title: '',
+          headerLeft: () => <BackButton navigation={navigation}/>
+        })}
+      />
     </Stack.Navigator>
   )
 }

@@ -1,41 +1,32 @@
 import { gql } from 'apollo-server';
 import * as yup from 'yup';
-import Question from '../../models/Question';
+import Collection from '../../models/Collection';
 
 export const typeDefs = gql`
   extend type Query {
     """
-    Returns paginated questions.
+    Returns paginated users.
     """
-    questions(
+    collections(
       first: Int
       after: String
-      categoryId: String
-      collectionId: String
-    ): QuestionConnection!
+      userId: String
+    ): CollectionConnection!
   }
 `;
 
 const argsSchema = yup.object({
-  categoryId: yup.string(),
+  id: yup.string(),
   after: yup.string(),
   first: yup.number().min(1).max(30).default(30),
 });
 
 export const resolvers = {
   Query: {
-    questions: async (obj, args) => {
+    collections: async (obj, args) => {
       const { first, after } = await argsSchema.validate(args);
 
-      let query = Question.query().where({ categoryId: args.categoryId });
-
-      if (args.collectionId) {
-        query = Question.query().where(
-          'collectionId',
-          'like',
-          `%${args.collectionId}%`,
-        );
-      }
+      const query = Collection.query().where({ userId: args.userId });
 
       return query.cursorPaginate({
         orderBy: [{ column: 'createdAt', order: 'desc' }, 'id'],

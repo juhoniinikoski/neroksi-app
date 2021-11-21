@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginVertical: -1,
         marginLeft: 48,
-        borderColor: themeColors.secondaryLight
-    },
-    bigSeparator: {
-        flex: 1, 
-        borderWidth: 4,
         borderColor: themeColors.primaryBackground
     },
     scrollItemView: {
@@ -41,6 +36,28 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 36,
         borderRadius: 12
+    },
+    selectionItem: {
+        marginHorizontal: 1,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    leftSelectionItem: {
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        marginRight: 1,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    rightSelectionItem: {
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        marginLeft: 1,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     // CATEGORIES

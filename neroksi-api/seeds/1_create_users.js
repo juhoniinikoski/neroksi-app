@@ -1,6 +1,6 @@
 const oneHour = 1000 * 60 * 60;
 
-const createDateColumns = date => ({
+const createDateColumns = (date) => ({
   created_at: date,
   updated_at: date,
 });
@@ -10,9 +10,10 @@ const password = '$2b$10$i6OAqjuT7noL/PrsctZQ7O8FkrZ1Ml9RBHx2ro9PY3hqa2OcW5Ah2';
 
 const commonColumns = {
   password,
+  email: 'testi@gmail.com',
 };
 
-exports.seed = async knex => {
+exports.seed = async (knex) => {
   await knex('users').del();
 
   await knex('users').insert([
