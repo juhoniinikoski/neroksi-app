@@ -7,6 +7,8 @@
 
   <h1 align="center">neroksi</h1>
 
+  ![Cover image](/client/assets/neroksi.png)
+
   <p align="center">
     your learning community
     <br />
