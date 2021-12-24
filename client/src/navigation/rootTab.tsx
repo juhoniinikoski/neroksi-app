@@ -3,13 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeStack } from "./homeStack"
 import { ProfileStack } from './profileStack'
 import colors, { themeColors } from '../styles/colorStyles'
-import { View } from 'react-native'
 import { Entypo, FontAwesome } from '@expo/vector-icons'
 
 const Tabs = createBottomTabNavigator()
-
-// extract styles for tabBar for cleaner code
-// check ways to make navigation simpler
 
 export const TabNav = () => (
   <Tabs.Navigator 
@@ -21,7 +17,17 @@ export const TabNav = () => (
       },
       showLabel: false
     }}>
-    <Tabs.Screen name="Home" component={HomeStack} options={{tabBarIcon: ({ focused }) => <Entypo name="home" size={24} color={focused ? 'white' : colors.disabled}/>}}/>
-    <Tabs.Screen name="Profile" component={ProfileStack} options={{tabBarIcon: ({ focused }) => <FontAwesome name="user" size={24} color={focused ? 'white' : colors.disabled}/>}}/>
+    <Tabs.Screen
+      name="Home"
+      component={HomeStack}
+      options={{
+        tabBarIcon: ({ focused }) => <Entypo name="home" size={24} color={focused ? 'white' : colors.disabled}/>
+      }}/>
+    <Tabs.Screen
+      name="Profile"
+      component={ProfileStack}
+      options={{
+        tabBarIcon: ({ focused }) => <FontAwesome name="user" size={24} color={focused ? 'white' : colors.disabled}/>
+      }}/>
   </Tabs.Navigator>
 )

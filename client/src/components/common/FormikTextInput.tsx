@@ -2,7 +2,6 @@ import React from 'react'
 import { useField } from 'formik'
 import { Text } from 'react-native'
 import TextInput from './TextInput'
-import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
 
 interface Props {

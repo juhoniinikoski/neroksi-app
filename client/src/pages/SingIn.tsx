@@ -24,7 +24,6 @@ function SignInScreen() {
           placeholder="Username"
           autoCapitalize='none'
           value={username}
-          // tyle={{height: 40, backgroundColor: 'white'}}
           style={styles.signInForm}
           onChangeText={setUsername}
         />
@@ -37,7 +36,6 @@ function SignInScreen() {
           secureTextEntry
         />
         <Button title="Sign in" onPress={() => signIn()} />
-        {/* <Button title="Sign in" onPress={() => signIn({ username, password })} /> */}
       </View>
     )
 }

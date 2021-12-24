@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
-import { View, Pressable, Text, Switch } from 'react-native'
-import { useField } from 'formik'
+import React from 'react'
+import { View, Pressable, Text } from 'react-native'
 import FormikTextInput from '../common/FormikTextInput'
 import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
-import { FontAwesome5 } from '@expo/vector-icons'
-import colors from '../../styles/colorStyles'
 
 interface Props {
   onSubmit: () => void

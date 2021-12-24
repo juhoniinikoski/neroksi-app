@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView, TextInput, Pressable, Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Formik } from 'formik'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'

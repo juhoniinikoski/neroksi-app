@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, FlatList, Dimensions, Text, Button } from 'react-native'
+import { View, FlatList, Dimensions, Text } from 'react-native'
 import OptionBox from '../components/question/OptionBox'
 import {useCategoryQuestions as useQuestions} from '../hooks/useQuestions'
 import styles from '../styles/styles'

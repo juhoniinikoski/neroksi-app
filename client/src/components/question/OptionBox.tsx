@@ -20,8 +20,6 @@ const OptionBox: React.FC<Props> = ( {item, index, scroll, lastIndex} ) => {
 
   const navigation = useNavigation()
 
-  // lisätään funktio, joka tyhjentää selectedin, kun kyseinen sivu poistuu näkyvistä
-
   const checkAnswer = (item: {correct: boolean, id: number}) => {
     setSelected(item.id)
     if (!item.correct) {

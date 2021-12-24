@@ -1,5 +1,5 @@
 import React from 'react'
-import colors, { themeColors } from '../styles/colorStyles'
+import { themeColors } from '../styles/colorStyles'
 import {useAuth} from '../contexts/auth'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { View, Text} from 'react-native'

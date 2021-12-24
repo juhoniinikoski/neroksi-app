@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Button, TextInput } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useAuthContext } from '../contexts/authContext'
 import { useHeaderHeight } from '@react-navigation/stack'
 import styles from '../styles/styles'
 import { Formik } from 'formik'

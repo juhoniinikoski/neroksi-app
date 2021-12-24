@@ -21,21 +21,6 @@ const authLink = setContext(async (_, { headers }) =>
   })
 )
 
-// const authLink = setContext((_, { headers }) => {
-//   retrieveData().then(data => ({
-    
-//   }))
-//   // get the authentication token from local storage if it exists
-//   const token = ''
-//   // return the headers to the context so httpLink can read them
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : "",
-//     }
-//   }
-// })
-
 const createApolloClient = () => {
   return new ApolloClient({
     link: authLink.concat(httpLink),
@@ -58,6 +43,3 @@ const createApolloClient = () => {
 }
 
 export const apolloClient = createApolloClient()
-
-// https://github.com/apollographql/apollo-client/issues/6502
-// https://github.com/apollographql/apollo-client/blob/main/src/utilities/policies/pagination.ts
