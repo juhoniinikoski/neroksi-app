@@ -5,7 +5,7 @@ import FormikTextInput from '../common/FormikTextInput'
 import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'
-import colors, { themeColors } from '../../styles/colorStyles'
+import colors, { themeColors } from '../../styles/colorsStyles'
 import useCategories from '../../hooks/useCategories'
 import { useNavigation } from '@react-navigation/native'
 

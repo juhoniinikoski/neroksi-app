@@ -8,7 +8,7 @@ const Stack = createStackNavigator()
 
 export const AddStack = () => {
   return (
-    <Stack.Navigator initialRouteName = 'Add' mode='modal'>
+    <Stack.Navigator initialRouteName = 'Add'>
       <Stack.Screen
         name='Add'
         component={mainStack}
@@ -43,6 +43,10 @@ const mainStack = () => {
 interface Props {
   navigation: any
 }
+
+export type AddStackParamList = {
+  ConfirmAdd: { initialValues: any, category: any };
+};
 
 const BackButton: React.FC<Props> = ({navigation}) => {
 

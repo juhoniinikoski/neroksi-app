@@ -2,15 +2,16 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import { TabNav } from './rootTab'
 import Question from '../pages/Question'
-import { AddStack } from './addStack'
 import BackButton from '../components/common/BackButton'
+import { AddStack } from './addStack'
 
 const Stack = createStackNavigator()
 
-const MainStack = () => {
+export const AppStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name='Home' component={TabNav} options={{headerShown: false}}/>
+    <Stack.Navigator initialRouteName='HomeTab'>
+      <Stack.Screen name='HomeTab' component={TabNav} options={{headerShown: false}}/>
+      <Stack.Screen name='AddStack' component={AddStack} options={{headerShown: false, title: '', cardStyle: { backgroundColor: "transparent" }, presentation: 'modal'}}/>
       <Stack.Screen name='Question'
         component={Question}
         options={({ navigation, route }) => ({
@@ -19,15 +20,6 @@ const MainStack = () => {
           headerLeft: () => <BackButton navigation={navigation}/>
         })}
       />
-    </Stack.Navigator>
-  )
-}
-
-export const AppStack = () => {
-  return (
-    <Stack.Navigator initialRouteName='Main' mode='modal' screenOptions={{}}>
-      <Stack.Screen name='Main' component={MainStack} options={{headerShown: false, title: ''}}/>
-      <Stack.Screen name='Add' component={AddStack} options={{headerShown: false, title: '', cardStyle: { backgroundColor: "transparent" }}}/>
     </Stack.Navigator>
   )
 }

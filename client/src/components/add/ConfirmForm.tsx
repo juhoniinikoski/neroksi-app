@@ -4,7 +4,7 @@ import { useField } from 'formik'
 import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
 import { Entypo } from '@expo/vector-icons'
-import colors, { themeColors } from '../../styles/colorStyles'
+import colors, { themeColors } from '../../styles/colorsStyles'
 import { useNavigation } from '@react-navigation/native'
 
 interface Props {

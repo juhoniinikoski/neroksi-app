@@ -1,10 +1,12 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
 import { Formik } from 'formik'
-import { useHeaderHeight } from '@react-navigation/stack'
+import { useHeaderHeight } from '@react-navigation/elements'
 import styles from '../styles/styles'
 import QuestionForm from '../components/add/QuestionForm'
 import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { AddStackParamList } from '../navigation/addStack'
 
 interface Props {
   onSubmit: () => void
@@ -19,7 +21,7 @@ interface Props {
 
 const Add: React.FC<Props> = ({route}) => {
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProp<AddStackParamList>>()
 
   const initialCategory = route.params.initialCategory
 

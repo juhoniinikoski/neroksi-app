@@ -3,13 +3,14 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../pages/Home'
 import Category from '../pages/Category'
 import BackButton from '../components/common/BackButton'
+import { AddStack } from './addStack'
 
 const Stack = createStackNavigator()
 
 export const HomeStack = () => {
   return (
     <Stack.Navigator initialRouteName='Home'>
-      <Stack.Screen name='Home' component={Home} options={{headerTransparent: true, title: ''}}/>
+      <Stack.Screen name='Home' component={Home} options={{title: '', headerTransparent: true}}/>
       <Stack.Screen
         name='Category'
         component={Category}
@@ -20,4 +21,8 @@ export const HomeStack = () => {
         })}/>
     </Stack.Navigator>
   )
+}
+
+export type HomeStackParamList = {
+  Category: {category: any}
 }

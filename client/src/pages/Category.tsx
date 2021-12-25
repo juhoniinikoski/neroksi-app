@@ -1,4 +1,4 @@
-import { useHeaderHeight } from '@react-navigation/stack'
+import { useHeaderHeight } from '@react-navigation/elements'
 import React from 'react'
 import { Text, View, FlatList, Button } from 'react-native'
 import QuestionBox from '../components/category/QuestionBox'
@@ -99,7 +99,7 @@ const Category: React.FC<Props> = ( {route, navigation} ) => {
         onEndReached={onEndReach}
       />
       <Button title='lisää kysymys' 
-        onPress={() => navigation.navigate('Add', {
+        onPress={() => navigation.navigate('AddStack', {
           screen: 'Add',
           params: {
             screen: 'AddQuestions',

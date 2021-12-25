@@ -1,12 +1,14 @@
 import React from 'react'
 import { View, ScrollView } from 'react-native'
 import { Formik } from 'formik'
-import { useHeaderHeight } from '@react-navigation/stack'
+import { useHeaderHeight } from '@react-navigation/elements'
+import { StackNavigationProp } from '@react-navigation/stack'
 import styles from '../styles/styles'
 import { useMutation } from '@apollo/client'
 import { CREATE_QUESTION } from '../utils/graphql/mutations'
 import { useNavigation } from '@react-navigation/native'
 import ConfirmForm from '../components/add/ConfirmForm'
+import { HomeStackParamList } from '../navigation/homeStack'
 
 interface Props {
   route: any
@@ -17,7 +19,7 @@ const ConfirmAdd: React.FC<Props> = ( {route} ) => {
   const initialValues = route.params.initialValues
   const category = route.params.category
 
-  const navigation = useNavigation()
+  const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>()
 
 	const headerHeight = useHeaderHeight()
 

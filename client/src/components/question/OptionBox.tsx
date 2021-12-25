@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Pressable, StyleSheet } from 'react-native'
-import colors from '../../styles/colorStyles'
+import colors from '../../styles/colorsStyles'
 import styles from '../../styles/styles'
 import textStyles from '../../styles/textStyles'
 import { FontAwesome5 } from '@expo/vector-icons'

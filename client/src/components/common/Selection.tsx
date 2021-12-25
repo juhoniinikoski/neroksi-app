@@ -1,6 +1,6 @@
 import React from 'react'
 import { Pressable, Text, View } from 'react-native'
-import colors, { themeColors } from '../../styles/colorStyles'
+import colors, { themeColors } from '../../styles/colorsStyles'
 import styles from '../../styles/styles'
 
 

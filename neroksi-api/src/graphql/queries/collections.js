@@ -5,7 +5,7 @@ import Collection from '../../models/Collection';
 export const typeDefs = gql`
   extend type Query {
     """
-    Returns paginated users.
+    Returns paginated collections.
     """
     collections(
       first: Int

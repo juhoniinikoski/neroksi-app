@@ -2,29 +2,34 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeStack } from "./homeStack"
 import { ProfileStack } from './profileStack'
-import colors, { themeColors } from '../styles/colorStyles'
+import colors, { themeColors } from '../styles/colorsStyles'
 import { Entypo, FontAwesome } from '@expo/vector-icons'
 
 const Tabs = createBottomTabNavigator()
 
 export const TabNav = () => (
   <Tabs.Navigator 
-    tabBarOptions={{
-      style: {
-        backgroundColor: themeColors.primaryBackground,
-        borderTopWidth: 0,
-        elevation: 0
-      },
-      showLabel: false
+    screenOptions={{
+      "tabBarShowLabel": false,
+      "headerShown": false,
+      "tabBarStyle": [
+        {
+          "display": "flex",
+          "backgroundColor": themeColors.primaryBackground,
+          "borderTopWidth": 0,
+          "elevation": 0
+        }
+      ]
     }}>
     <Tabs.Screen
-      name="Home"
+      name="HomeStack"
       component={HomeStack}
       options={{
-        tabBarIcon: ({ focused }) => <Entypo name="home" size={24} color={focused ? 'white' : colors.disabled}/>
+        tabBarIcon: ({ focused }) => <Entypo name="home" size={24} color={focused ? 'white' : colors.disabled}/>,
+        title: ''
       }}/>
     <Tabs.Screen
-      name="Profile"
+      name="ProfileStack"
       component={ProfileStack}
       options={{
         tabBarIcon: ({ focused }) => <FontAwesome name="user" size={24} color={focused ? 'white' : colors.disabled}/>

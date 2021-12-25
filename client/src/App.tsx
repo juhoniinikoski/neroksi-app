@@ -1,6 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/client'
-import { themeColors } from './styles/colorStyles'
+import { themeColors } from './styles/colorsStyles'
 import { View } from 'react-native'
 import { AuthProvider } from './contexts/auth'
 import { Router } from './navigation/router'

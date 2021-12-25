@@ -1,4 +1,5 @@
-import { makeExecutableSchema, gql } from 'apollo-server';
+import { gql } from 'apollo-server';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { merge } from 'lodash';
 
 import User from './types/User';

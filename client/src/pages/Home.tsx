@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Pressable, FlatList, Button } from 'react-native'
-import { useHeaderHeight } from '@react-navigation/stack'
+import { useHeaderHeight } from '@react-navigation/elements'
 import styles from '../styles/styles'
 import textStyles from '../styles/textStyles'
 import useCategories from '../hooks/useCategories'

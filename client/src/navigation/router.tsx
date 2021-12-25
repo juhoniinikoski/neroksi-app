@@ -1,6 +1,6 @@
 import React from 'react'
-import { themeColors } from '../styles/colorStyles'
-import {useAuth} from '../contexts/auth'
+import { themeColors } from '../styles/colorsStyles'
+import { useAuth } from '../contexts/auth'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { View, Text} from 'react-native'
 import { AppStack } from './appStack'
@@ -17,7 +17,6 @@ const theme = {
 export const Router = () => {
 
   const {authData, loading} = useAuth()
-  // console.log(authData)
 
   if (loading) {
     return (
