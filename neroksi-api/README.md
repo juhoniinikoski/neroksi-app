@@ -16,7 +16,7 @@ Node (versions `12.X.X` are tested, but later versions _might_ work as well) and
 
 4. **(Optional)** To populate the database with some seed data you can run `npm run seed:run`. **Note:** running this command will remove all existing data in database.
 
-5. All done! Just run `npm start` to start the server. After the server has started you should be able to access the GraphQL playground at http://localhost:4000/graphql.
+5. All done! Just run `npm start` to start the server. After the server has started you should be able to access the Apollo Sandbox at http://localhost:4000/graphql.
 
 ## 🔑 Authorization
 
@@ -59,7 +59,7 @@ mutation {
 
 ### Authorize requests in the GraphQL playground
 
-A handy way to authorize requests in the GraphQL playground is to retrieve an access token using the `authorize` mutation (see above for details) and then add the following in the "HTTP HEADERS" tab below the query editor:
+A handy way to authorize requests in the Apollo Sandbox is to retrieve an access token using the `authorize` mutation (see above for details) and then add the following in the "HTTP HEADERS" tab below the query editor:
 
 ```json
 {

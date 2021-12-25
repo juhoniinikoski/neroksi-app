@@ -28,6 +28,35 @@ export const GET_CATEGORIES = gql`
   }
 `
 
+export const GET_COLLECTIONS = gql`
+  query collections(
+    $after: String
+    $first: Int
+    $userId: String
+  ) {
+    collections(
+      after: $after
+      first: $first
+      userId: $userId
+    ) {
+      edges {
+        node {
+          createdAt
+          id
+          collectionTitle
+          totalQuestions
+        }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+      }
+    }
+  }
+`
+
 export const GET_QUESTIONS = gql`
   query questions($categoryId: String, $collectionId: String, $after: String, $first: Int) {
     questions(collectionId: $collectionId, categoryId: $categoryId, after: $after, first: $first) {
@@ -51,6 +80,15 @@ export const GET_QUESTIONS = gql`
         startCursor
         hasNextPage
       }
+    }
+  }
+`
+
+export const GET_AUTHORIZED_USER = gql`
+  query authorizedUser {
+    authorizedUser {
+      username
+      id
     }
   }
 `

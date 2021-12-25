@@ -69,7 +69,6 @@ neroksi is built around:
 * [Expo](https://docs.expo.dev)
 * [GraphQL](https://graphql.org)
 * [Apollo](https://www.apollographql.com)
-* [Koa.js](https://koajs.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

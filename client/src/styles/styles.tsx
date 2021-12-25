@@ -133,6 +133,23 @@ const styles = StyleSheet.create({
         shadowOpacity: .4
     },
 
+    // PROFILE
+
+    collectionContainer: {
+        height: 125,
+        width: "50%",
+        display: 'flex'
+    },
+
+    collection: {
+        flex: 1,
+        backgroundColor: themeColors.primaryLight,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 16,
+        borderRadius: 20
+    },
+
     // ADD QUESTION
 
     questionForm: {
